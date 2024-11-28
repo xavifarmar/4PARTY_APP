@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">4PARTY</string>
+
+        <string name="product_title">Producto</string>
+        <string name="price">Precio</string>
+        <string name="like_button">Me gusta</string>
+
+</resources>

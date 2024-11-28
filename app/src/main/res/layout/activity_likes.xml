@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Bloque para el logo con fondo -->
+    <LinearLayout
+        android:id="@+id/logo_block"
+        android:layout_width="403dp"
+        android:layout_height="71dp"
+        android:background="@color/white_grey"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Logo centrado en el bloque -->
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_box_logo_no_fondo" />
+    </LinearLayout>
+
+    <!-- Barra de Navegación Inferior -->
+    <LinearLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/red"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/home_icon"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/white"
+            android:contentDescription="home_button"/>
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="search button"
+            app:srcCompat="@drawable/search_icon"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/cart_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="cart_button"
+            app:srcCompat="@drawable/cart_icon"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/heart_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="heart_button"
+            app:srcCompat="@drawable/heart_icon"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/profile_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="profile_button"
+            app:srcCompat="@drawable/profile_icon"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

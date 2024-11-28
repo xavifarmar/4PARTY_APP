@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- RecyclerView para mostrar la lista de productos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="603dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <!-- Barra de Navegación Inferior -->
+    <LinearLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="0dp"
+        android:layout_height="76dp"
+        android:background="@color/red"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="5">
+
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/home_icon"
+            android:backgroundTint="@android:color/transparent"
+            android:background="@drawable/border_selector"
+            android:contentDescription="home_button"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="search button"
+            app:srcCompat="@drawable/search_icon"
+            android:background="@drawable/border_selector"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/cart_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="cart_button"
+            app:srcCompat="@drawable/cart_icon"
+            android:background="@drawable/border_selector"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/heart_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="heart_button"
+            app:srcCompat="@drawable/heart_icon"
+            android:background="@drawable/border_selector"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/profile_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="profile_button"
+            android:background="@drawable/border_selector"
+            app:srcCompat="@drawable/profile_icon"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- Bloque para el logo con fondo -->
+    <LinearLayout
+        android:id="@+id/logo_block"
+        android:layout_width="412dp"
+        android:layout_height="54dp"
+        android:background="@color/white_grey"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Logo en el centro del bloque -->
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="152dp"
+            android:layout_height="38dp"
+            android:backgroundTint="@color/red"
+            app:srcCompat="@drawable/logo_icon_small" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
