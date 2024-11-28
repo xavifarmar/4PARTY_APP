@@ -119,4 +119,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo_icon_small" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="154dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
+        android:text="Atras"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
