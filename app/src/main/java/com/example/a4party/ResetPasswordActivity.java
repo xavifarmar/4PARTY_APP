@@ -24,6 +24,7 @@ import java.util.Map;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
+    private String email;
     // URLs de las APIs
     String urlSendMail = "http://10.0.2.2/4PARTY/sendMail.php";
     String urlVerifyCode = "http://10.0.2.2/4PARTY/verifyCode.php";
@@ -61,7 +62,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     // Enviar correo con el código OTP
     public void sendCodeEmail() {
-        String email = emailTxt.getText().toString();
+        email = emailTxt.getText().toString();
 
         if (email.isEmpty()) {
             Toast.makeText(this, "Debe ingresar un correo", Toast.LENGTH_LONG).show();
@@ -136,6 +137,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("otp", code);
+                params.put("email", email);
                 return params;
             }
         };
