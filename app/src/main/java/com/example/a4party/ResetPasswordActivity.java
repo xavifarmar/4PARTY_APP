@@ -27,7 +27,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     // URLs de las APIs
     String urlSendMail = "http://10.0.2.2/4PARTY/sendMail.php";
     String urlVerifyCode = "http://10.0.2.2/4PARTY/verifyCode.php";
-    String urlResetPassword = "http://10.0.2.2/4PARTY/resetPasswdd.php";
+    String urlResetPassword = "http://10.0.2.2/4PARTY/resetpasswd.php";
 
     // Campos del layout
     EditText emailTxt, codeTxt, newPasswdTxt;
