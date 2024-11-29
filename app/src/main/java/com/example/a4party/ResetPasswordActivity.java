@@ -1,5 +1,6 @@
 package com.example.a4party;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     // Campos del layout
     EditText emailTxt, codeTxt, newPasswdTxt;
-    Button sendCodeBtn, verifyCodeBtn, resetPassBtn;
+    Button sendCodeBtn, verifyCodeBtn, resetPassBtn, backButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         emailTxt = findViewById(R.id.email_txt);
         codeTxt = findViewById(R.id.codeTxt);
         newPasswdTxt = findViewById(R.id.newPasswordTxt);
+        backButton = findViewById(R.id.backButton);
 
         sendCodeBtn = findViewById(R.id.sendCodeBtn);
         verifyCodeBtn = findViewById(R.id.verifyCodeBtn);
@@ -58,6 +60,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
         sendCodeBtn.setOnClickListener(view -> sendCodeEmail());
         verifyCodeBtn.setOnClickListener(view -> verifyCode());
         resetPassBtn.setOnClickListener(view -> resetPasswd());
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Enviar correo con el código OTP
@@ -177,6 +187,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("newPasswd", newPasswd);
+                params.put("email", email);
                 return params;
             }
         };
