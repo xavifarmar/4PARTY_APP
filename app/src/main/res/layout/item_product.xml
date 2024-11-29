@@ -7,8 +7,8 @@
 
 
     <LinearLayout
-        android:layout_width="221dp"
-        android:layout_height="300dp"
+        android:layout_width="217dp"
+        android:layout_height="329dp"
         android:background="@android:color/white"
         android:elevation="2dp"
         android:orientation="vertical"
@@ -26,7 +26,7 @@
             android:layout_marginBottom="8dp"
             android:text="Producto"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <!-- Imagen del Producto -->

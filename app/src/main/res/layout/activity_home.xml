@@ -91,7 +91,7 @@
     <!-- Bloque para el logo con fondo -->
     <LinearLayout
         android:id="@+id/logo_block"
-        android:layout_width="412dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@color/white_grey"
         android:gravity="center"
@@ -104,9 +104,10 @@
         <!-- Logo en el centro del bloque -->
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="152dp"
-            android:layout_height="38dp"
+            android:layout_width="162dp"
+            android:layout_height="45dp"
             android:backgroundTint="@color/red"
+            app:tint="@color/red"
             app:srcCompat="@drawable/logo_icon_small" />
     </LinearLayout>
 

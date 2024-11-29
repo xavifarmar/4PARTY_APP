@@ -5,23 +5,27 @@
     android:layout_height="match_parent">
 
     <!-- Bloque para el logo con fondo -->
+    <!-- Bloque para el logo con fondo -->
     <LinearLayout
         android:id="@+id/logo_block"
-        android:layout_width="403dp"
-        android:layout_height="71dp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
         android:background="@color/white_grey"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Logo centrado en el bloque -->
+        <!-- Logo en el centro del bloque -->
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/icon_box_logo_no_fondo" />
+            android:layout_width="162dp"
+            android:layout_height="45dp"
+            android:backgroundTint="@color/red"
+            app:tint="@color/red"
+            app:srcCompat="@drawable/logo_icon_small" />
     </LinearLayout>
 
     <!-- Barra de Navegación Inferior -->
