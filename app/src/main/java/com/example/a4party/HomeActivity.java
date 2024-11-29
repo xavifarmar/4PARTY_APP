@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -45,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         productList = new ArrayList<>();
 
         // Configurar el adaptador y asignarlo al RecyclerView
-        productAdapter = new ProductAdapter(productList);
+        productAdapter = new ProductAdapter(this, productList);
         recyclerView.setAdapter(productAdapter);
 
         // Llamar a la función para obtener los productos
@@ -154,11 +153,5 @@ public class HomeActivity extends AppCompatActivity {
 
         // Agregar la solicitud a la cola de Volley
         Volley.newRequestQueue(this).add(stringRequest);
-    }
-
-    // Método para navegar a la pantalla de descripción del producto cuando se hace clic en un producto
-    public void navigateToProduct(View v) {
-        Intent intent = new Intent(HomeActivity.this, ProductDescriptionActivity.class);
-        startActivity(intent);
     }
 }

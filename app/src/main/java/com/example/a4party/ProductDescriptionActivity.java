@@ -2,29 +2,44 @@ package com.example.a4party;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+//import com.bumptech.glide.Glide;
+
 public class ProductDescriptionActivity extends AppCompatActivity {
-    Button back_btn;
+
+    private TextView productName, productPrice;
+    private ImageView productImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product_description);
 
-        back_btn = findViewById(R.id.backBtn);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (ProductDescriptionActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
+        // Inicializamos las vistas
+        productName = findViewById(R.id.product_name);
+        productPrice = findViewById(R.id.product_price);
+        productImage = findViewById(R.id.product_image);
 
+        // Recuperamos los datos del Intent
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("product_name");
+        String price = intent.getStringExtra("product_price");
+        String image = intent.getStringExtra("product_image");
+
+        // Establecemos los valores
+        productName.setText(name);
+        productPrice.setText(price);
+
+        // Verificamos si la imagen está presente antes de intentar cargarla
+        if (image != null && !image.isEmpty()) {
+            //Glide.with(this).load(image).into(productImage);
+        } else {
+            // Si no hay imagen, puedes poner una imagen predeterminada o dejar el ImageView vacío
+            productImage.setImageResource(R.drawable.profile_icon); // default_image es una imagen predeterminada
+        }
     }
-
 }
