@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;  // Importa Picasso
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private Context context;
     private List<Product> productList;
 
+    // Constructor del adaptador
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
@@ -34,15 +35,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         Product product = productList.get(position);
 
+        // Establece el nombre y precio del producto
         holder.productName.setText(product.getName());
         holder.productPrice.setText("$" + product.getPrice());
 
-        if (product.getImages().size() > 0) {
-            String imageUrl = product.getImages().get(0);
-            /*Glide.with(holder.itemView.getContext())
-                    .load(imageUrl)
-                    .into(holder.productImage);*/
-        }
+        // Usar una URL estática para la imagen
+        String imageUrl = "https://static.bershka.net/4/photos2/2024/I/0/2/p/5342/171/800//06/5342171800_2_4_3.jpg?t=1689779857435";
+
+        // Cargar la imagen con Picasso desde la URL estática
+        Picasso.get()
+                .load(imageUrl)  // URL estática de la imagen
+                //.placeholder(R.drawable.placeholder)  // Imagen de carga
+                //.error(R.drawable.error)  // Imagen en caso de error
+                .into(holder.productImage);  // Establece la imagen en el ImageView
 
         // Configuración del clic en un producto
         holder.itemView.setOnClickListener(v -> {
@@ -50,7 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             Intent intent = new Intent(context, ProductDescriptionActivity.class);
             intent.putExtra("product_name", product.getName());
             intent.putExtra("product_price", product.getPrice());
-            intent.putExtra("product_image", product.getImages().get(0)); // Primera imagen del producto
+            intent.putExtra("product_image", imageUrl); // Usamos la URL estática aquí
             context.startActivity(intent);
         });
     }
