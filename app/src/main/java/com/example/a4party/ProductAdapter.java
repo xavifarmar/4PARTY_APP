@@ -2,54 +2,64 @@ package com.example.a4party;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.a4party.Product;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductoViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<Product> productoList;
+    private List<Product> productList;
 
     // Constructor
-    public ProductAdapter(List<Product> productoList) {
-        this.productoList = productoList;
+    public ProductAdapter(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override
-    public ProductoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_individual_product, parent, false);
-        return new ProductoViewHolder(view);
+    public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        return new ProductViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ProductoViewHolder holder, int position) {
-        Product producto = productoList.get(position);
-        holder.nombre.setText(producto.getProduct_name());
-        holder.precio.setText(producto.getProduct_price());
-        holder.imagen.setImageResource(producto.getProduct_img());
+    public void onBindViewHolder(ProductViewHolder holder, int position) {
+        Product product = productList.get(position);
+
+        // Seteamos los datos del producto
+        holder.productName.setText(product.getName());
+        holder.productPrice.setText("$" + product.getPrice());
+
+        // Mostrar la imagen principal (la primera imagen de la lista)
+        if (product.getImages().size() > 0) {
+            String imageUrl = product.getImages().get(0);  // Tomamos la primera imagen como principal
+            // Usar una librería como Glide o Picasso para cargar la imagen en ImageView
+            /*Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .into(holder.productImage);*/
+        }
     }
 
     @Override
     public int getItemCount() {
-        return productoList.size();
+        return productList.size();
     }
 
-    public static class ProductoViewHolder extends RecyclerView.ViewHolder {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nombre;
-        TextView precio;
-        ImageView imagen;
-        ImageButton likeButton;
+        TextView productName, productPrice;
+        ImageView productImage;
 
-        public ProductoViewHolder(View itemView) {
+        public ProductViewHolder(View itemView) {
             super(itemView);
-            nombre = itemView.findViewById(R.id.product_title1);
-            precio = itemView.findViewById(R.id.price_product1);
-            imagen = itemView.findViewById(R.id.image_product1);
-            likeButton = itemView.findViewById(R.id.like1);
+
+            productName = itemView.findViewById(R.id.product_title);
+            productPrice = itemView.findViewById(R.id.price_product);
+            productImage = itemView.findViewById(R.id.image_product);
         }
     }
 }

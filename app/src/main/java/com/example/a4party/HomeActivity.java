@@ -4,19 +4,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
-    private ProductAdapter productoAdapter;
-    private List<Product> productoList;
+    private ProductAdapter productAdapter;
+    private List<Product> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,47 +37,45 @@ public class HomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
+        // Inicializar RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        // Creamos una lista de productos (puedes obtenerla de una base de datos o API)
-        productoList = new ArrayList<>();
-        productoList.add(new Product("Producto 1", "$100", R.drawable.cart_red_icon));
-        productoList.add(new Product("Producto 2", "$200", R.drawable.cart_red_icon));
-        productoList.add(new Product("Producto 3", "$300", R.drawable.cart_red_icon));
-        productoList.add(new Product("Producto 1", "$100", R.drawable.cart_red_icon));
-        productoList.add(new Product("Producto 2", "$200", R.drawable.cart_red_icon));
-        productoList.add(new Product("Producto 3", "$300", R.drawable.cart_red_icon));
+        // Inicializar la lista de productos
+        productList = new ArrayList<>();
 
-        // Creamos el adaptador y lo asignamos al RecyclerView
-        productoAdapter = new ProductAdapter(productoList);
-        recyclerView.setAdapter(productoAdapter);
+        // Configurar el adaptador y asignarlo al RecyclerView
+        productAdapter = new ProductAdapter(productList);
+        recyclerView.setAdapter(productAdapter);
 
-        // Referencia a los botones
-        ImageButton likes_btn = findViewById(R.id.heart_btn);
-        ImageButton profile_btn = findViewById(R.id.profile_btn);
-        ImageButton cart_btn = findViewById(R.id.cart_btn);
-        ImageButton search_btn = findViewById(R.id.search_btn);
+        // Llamar a la función para obtener los productos
+        obtenerProductos();
+
+        // Referencias a los botones de navegación
+        ImageButton likesBtn = findViewById(R.id.heart_btn);
+        ImageButton profileBtn = findViewById(R.id.profile_btn);
+        ImageButton cartBtn = findViewById(R.id.cart_btn);
+        ImageButton searchBtn = findViewById(R.id.search_btn);
         ImageButton homeBtn = findViewById(R.id.home_btn);
 
-        homeBtn.setSelected(true);  // Selecciona el botón de inicio
-        search_btn.setSelected(false);  // Desactiva el botón de búsqueda
-        cart_btn.setSelected(false);  // Y así con los demás botones
-        likes_btn.setSelected(false);
-        profile_btn.setSelected(false);
+        // Configurar los estados de los botones (seleccionados/desactivados)
+        homeBtn.setSelected(true);
+        searchBtn.setSelected(false);
+        cartBtn.setSelected(false);
+        likesBtn.setSelected(false);
+        profileBtn.setSelected(false);
 
-
-        cart_btn.setOnClickListener(new View.OnClickListener() {
+        // Configurar los OnClickListeners para los botones de navegación
+        cartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Cambiar a la actividad LikesActivity
+                // Cambiar a la actividad CartActivity
                 Intent intent = new Intent(HomeActivity.this, CartActivity.class);
                 startActivity(intent);
             }
         });
 
-        // Configurar el OnClickListener para el botón likes_btn
-        likes_btn.setOnClickListener(new View.OnClickListener() {
+        likesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Cambiar a la actividad LikesActivity
@@ -73,28 +84,80 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        profile_btn.setOnClickListener(new View.OnClickListener() {
+        profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Cambiar a la actividad
+                // Cambiar a la actividad ProfileActivity
                 Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
 
-        search_btn.setOnClickListener(new View.OnClickListener() {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Cambiar a la actividad
+                // Cambiar a la actividad SearchActivity
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
 
-    public void navigateToProduct(View v){
+    // Método para obtener los productos de la base de datos
+    private void obtenerProductos() {
+        // URL de tu archivo PHP que devuelve los productos en formato JSON
+        String url = "http://10.0.2.2/4PARTY/get_products.php"; // Cambia por la URL de tu servidor
+
+        // Crear la solicitud de tipo StringRequest
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            // Convertir la respuesta a un JSONArray
+                            JSONArray jsonArray = new JSONArray(response);
+                            // Limpiar la lista de productos
+                            productList.clear();
+
+                            // Recorrer el JSON y agregar productos a la lista
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject productObject = jsonArray.getJSONObject(i);
+                                String name = productObject.getString("name");
+                                String price = productObject.getString("price");
+
+                                // Se agregan las imágenes si están presentes
+                                JSONArray imagesArray = productObject.getJSONArray("images");
+                                List<String> images = new ArrayList<>();
+                                for (int j = 0; j < imagesArray.length(); j++) {
+                                    images.add(imagesArray.getString(j));
+                                }
+
+                                // Crear un objeto Product y agregarlo a la lista
+                                Product product = new Product(name, price, images);
+                                productList.add(product);
+                            }
+
+                            // Notificar al adaptador que los datos han cambiado
+                            productAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(HomeActivity.this, "Error al cargar los productos", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(HomeActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        // Agregar la solicitud a la cola de Volley
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    // Método para navegar a la pantalla de descripción del producto cuando se hace clic en un producto
+    public void navigateToProduct(View v) {
         Intent intent = new Intent(HomeActivity.this, ProductDescriptionActivity.class);
         startActivity(intent);
     }
