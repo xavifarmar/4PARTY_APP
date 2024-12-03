@@ -5,57 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
+    <!-- Contenedor principal del Producto con borde y sombra -->
     <LinearLayout
-        android:layout_width="217dp"
-        android:layout_height="329dp"
-        android:background="@android:color/white"
-        android:elevation="2dp"
+        android:layout_width="218dp"
+        android:layout_height="319dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/product_border"
+        android:elevation="6dp"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.606"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap">
 
         <!-- Título del Producto -->
         <TextView
             android:id="@+id/product_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:gravity="center"
             android:text="Producto"
             android:textColor="@android:color/black"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <!-- Imagen del Producto -->
         <ImageView
             android:id="@+id/image_product"
-            android:layout_width="191dp"
-            android:layout_height="177dp"
+            android:layout_width="169dp"
+            android:layout_height="148dp"
             android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <!-- Precio del Producto -->
-        <TextView
-            android:id="@+id/price_product"
-            android:layout_width="wrap_content"
+        <!-- Contenedor de Precio y Botón de Like en Horizontal -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="$100"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:layout_marginTop="8dp"
+            android:gravity="start|end"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <!-- Botón de Like -->
-        <ImageButton
-            android:id="@+id/like_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="Like Button"
-            app:srcCompat="@drawable/heart_icon" />
+            <!-- Precio del Producto alineado a la izquierda -->
+
+            <!-- Botón de Like alineado a la derecha -->
+            <TextView
+                android:id="@+id/price_product"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0.8"
+                android:text="$100"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/like_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Like Button"
+                app:srcCompat="@drawable/heart_icon"
+                app:tint="@android:color/black" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
