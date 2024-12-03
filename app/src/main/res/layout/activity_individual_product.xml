@@ -3,30 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
 
-    <!-- Contenedor principal (LinearLayout horizontal) para el Producto -->
+    <!-- Contenedor principal del Producto -->
     <LinearLayout
         android:id="@+id/product_container"
-        android:layout_width="234dp"
-        android:layout_height="300dp"
+        android:layout_width="235dp"
+        android:layout_height="285dp"
         android:layout_margin="8dp"
         android:layout_marginTop="4dp"
         android:background="@android:color/white"
         android:elevation="4dp"
         android:gravity="center_horizontal"
-        android:onClick="navigateToProduct"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap">
 
         <!-- Título del Producto -->
         <TextView
             android:id="@+id/product_title1"
-            android:layout_width="wrap_content"
+            android:layout_width="153dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:gravity="center"
@@ -41,14 +42,14 @@
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_marginBottom="8dp"
-            android:contentDescription="foto_producto"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
         <!-- Precio y Botón de Like -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="194dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

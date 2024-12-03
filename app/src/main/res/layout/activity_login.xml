@@ -7,114 +7,124 @@
     android:background="@drawable/fondo2"
     android:padding="16dp">
 
-    <!-- Contenedor principal -->
+    <!-- Contenedor principal con borde y esquinas redondeadas -->
     <LinearLayout
-        android:layout_width="377dp"
-        android:layout_height="474dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="1dp"
+        android:background="@drawable/border_color"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="50dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Título alineado a la izquierda -->
+    <!-- Título alineado a la izquierda -->
+
+        <!-- Campo de texto: Correo -->
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="30dp"
             android:gravity="start"
             android:text="Iniciar Sesión"
-            android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold|italic" />
 
-        <!-- Campo de texto: Correo -->
         <EditText
-            android:id="@+id/email_txt"
-            android:layout_width="346dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_drawable"
-            android:hint="Correo"
-            android:inputType="textEmailAddress"
-            android:padding="12dp"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
-            android:textStyle="bold|italic"
-            android:textColorHint="@color/white"/>
+        android:id="@+id/email_txt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edit_text_drawable"
+        android:hint="Correo"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        android:textColorHint="@android:color/darker_gray"/>
 
-        <!-- Campo de texto: Contraseña -->
-        <EditText
-            android:id="@+id/password_txt"
-            android:layout_width="346dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="35dp"
-            android:background="@drawable/edit_text_drawable"
-            android:hint="Contrasena"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold|italic"
-            android:textColorHint="@color/white"/>
+    <!-- Campo de texto: Contraseña -->
+    <EditText
+        android:id="@+id/password_txt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/edit_text_drawable"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        android:textColorHint="@android:color/darker_gray"/>
 
-        <!-- Botón: Iniciar Sesión -->
-        <Button
-            android:id="@+id/login_btn"
-            android:layout_width="330dp"
-            android:layout_height="49dp"
-            android:background="@color/red"
-            android:gravity="center"
-            android:text="Iniciar Sesión"
-            android:textAlignment="gravity"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold|italic" />
+    <!-- Botón: Iniciar Sesión -->
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/red"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="Iniciar Sesión"
+        android:textAlignment="gravity"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
 
-        <!-- Texto: Registro -->
-        <TextView
-            android:id="@+id/register_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:onClick="navigateToRegister"
-            android:text="¿No tienes una cuenta? Regístrate aquí."
-            android:textColor="#3F4EAB"
-            android:textSize="16sp"
-            android:textStyle="bold|italic" />
+    <!-- Texto: Registro -->
+    <TextView
+        android:id="@+id/register_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:onClick="navigateToRegister"
+        android:text="¿No tienes una cuenta? Regístrate aquí."
+        android:textColor="#3F4EAB"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
 
-        <!-- Texto: Olvidé mi contraseña -->
-        <TextView
-            android:id="@+id/forgot_password_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:onClick="navigateToResetPassword"
-            android:text="¿Olvidaste tu contraseña?"
-            android:textColor="@color/red"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+    <!-- Texto: Olvidé mi contraseña -->
+    <TextView
+        android:id="@+id/forgot_password_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:onClick="navigateToResetPassword"
+        android:text="¿Olvidaste tu contraseña?"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:textStyle="italic" />
 
-    </LinearLayout>
+</LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="229dp"
-        android:layout_height="63dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.552"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_icon_small" />
+    <!-- Logo en la parte superior -->
+<ImageView
+android:id="@+id/imageView2"
+android:layout_width="229dp"
+android:layout_height="63dp"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="0.552"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:srcCompat="@drawable/logo_icon_small" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
