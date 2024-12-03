@@ -1,15 +1,19 @@
 package com.example.a4party;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;  // Importa Picasso
+
+import java.util.Set;
 
 public class ProductDescriptionActivity extends AppCompatActivity {
 
@@ -25,6 +29,14 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         productName = findViewById(R.id.product_name);
         productPrice = findViewById(R.id.product_price);
         productImage = findViewById(R.id.product_image);
+        ImageButton likeBtn = findViewById(R.id.likeBtn);
+
+        likeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                likeBtn.setBackgroundTintList(ColorStateList.valueOf(950909));
+            }
+        });
 
         // Recuperamos los datos del Intent
         Intent intent = getIntent();

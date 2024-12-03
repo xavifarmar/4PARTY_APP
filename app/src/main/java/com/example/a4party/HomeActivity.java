@@ -63,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton searchBtn = findViewById(R.id.search_btn);
         ImageButton homeBtn = findViewById(R.id.home_btn);
 
+
         // Configurar los estados de los botones (seleccionados/desactivados)
         homeBtn.setSelected(true);
         searchBtn.setSelected(false);

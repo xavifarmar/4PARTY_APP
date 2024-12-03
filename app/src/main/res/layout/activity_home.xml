@@ -8,17 +8,17 @@
     <!-- RecyclerView para mostrar la lista de productos -->
 
     <!-- Barra de Navegación Inferior -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="603dp"
+        android:layout_width="463dp"
+        android:layout_height="697dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <LinearLayout
         android:id="@+id/navigation_bar"
@@ -111,5 +111,16 @@
             app:tint="@color/red"
             app:srcCompat="@drawable/logo_icon_small" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="269dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:text="Productos"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        tools:layout_editor_absoluteX="28dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
