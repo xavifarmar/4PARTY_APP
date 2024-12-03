@@ -38,8 +38,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // Inicializar RecyclerView
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2); // Dos columnas
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        // Añadir espaciado entre los ítems
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 20, true)); // 16dp de espaciado horizontal y vertical
+
 
         // Inicializar la lista de productos
         productList = new ArrayList<>();

@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".MainActivity">
+    tools:context=".HomeActivity">
 
-    <!-- Contenedor principal del Producto -->
+    <!-- Contenedor principal del Producto con sombra y borde -->
     <LinearLayout
         android:id="@+id/product_container"
-        android:layout_width="235dp"
-        android:layout_height="285dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/white"
-        android:elevation="4dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/product_border"
+        android:elevation="6dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
@@ -24,56 +24,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="wrap">
 
-        <!-- Título del Producto -->
+    <!-- Título del Producto -->
+    <TextView
+        android:id="@+id/product_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/product_title"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Imagen del Producto -->
+    <ImageView
+        android:id="@+id/image_product1"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <!-- Precio y Botón de Like -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Precio del Producto -->
         <TextView
-            android:id="@+id/product_title1"
-            android:layout_width="153dp"
+            android:id="@+id/price_product1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="@string/product_title"
+            android:layout_marginEnd="16dp"
+            android:text="@string/price"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
-        <!-- Imagen del Producto -->
-        <ImageView
-            android:id="@+id/image_product1"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginBottom="8dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <!-- Precio y Botón de Like -->
-        <LinearLayout
-            android:layout_width="194dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <!-- Precio del Producto -->
-            <TextView
-                android:id="@+id/price_product1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/price"
-                android:textColor="@android:color/black"
-                android:textSize="22sp" />
-
-            <!-- Botón de Like -->
-            <ImageButton
-                android:id="@+id/like1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/like_button"
-                app:srcCompat="@drawable/heart_icon"
-                app:tint="@android:color/black" />
-        </LinearLayout>
-
+        <!-- Botón de Like -->
+        <ImageButton
+            android:id="@+id/like1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/like_button"
+            app:srcCompat="@drawable/heart_icon"
+            app:tint="@android:color/black" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
