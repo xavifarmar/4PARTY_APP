@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;  // Importa Picasso
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -37,19 +38,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         // Establece el nombre y precio del producto
         holder.productName.setText(product.getName());
-        holder.productPrice.setText("$" + product.getPrice());
+        holder.productPrice.setText("€" + product.getPrice());
+        String imageUrl = product.getImage();
 
-        // Usar una URL estática para la imagen
-        String imageUrl = "https://static.bershka.net/4/photos2/2024/I/0/2/p/5342/171/800//06/5342171800_2_4_3.jpg?t=1689779857435";
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Picasso.get().load(imageUrl).into(holder.productImage);
+        } else {
+            holder.productImage.setImageResource(R.drawable.profile_icon); // Imagen por defecto
+        }
 
-        // Cargar la imagen con Picasso desde la URL estática
-        Picasso.get()
-                .load(imageUrl)  // URL estática de la imagen
-                //.placeholder(R.drawable.placeholder)  // Imagen de carga
-                //.error(R.drawable.error)  // Imagen en caso de error
-                .into(holder.productImage);  // Establece la imagen en el ImageView
-
-        // Configuración del clic en un producto
         holder.itemView.setOnClickListener(v -> {
             // Pasa la información del producto a la actividad ProductDescriptionActivity
             Intent intent = new Intent(context, ProductDescriptionActivity.class);

@@ -2,6 +2,7 @@ package com.example.a4party;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -105,16 +106,22 @@ public class HomeActivity extends AppCompatActivity {
     // Método para obtener los productos de la base de datos
     private void obtenerProductos() {
         // URL de tu archivo PHP que devuelve los productos en formato JSON
-        String url = "http://10.0.2.2/4PARTY/get_products.php"; // Cambia por la URL de tu servidor
+        String url = "http://10.0.2.2/4PARTY/productos.php"; // Cambia por la URL de tu servidor
+
+        Log.d("API Request", "Haciendo solicitud a: " + url); // Log para ver la URL
 
         // Crear la solicitud de tipo StringRequest
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("API Response", response); // Log para mostrar la respuesta
+
                         try {
                             // Convertir la respuesta a un JSONArray
                             JSONArray jsonArray = new JSONArray(response);
+                            Log.d("JSON Array Size", String.valueOf(jsonArray.length())); // Ver el tamaño del array
+
                             // Limpiar la lista de productos
                             productList.clear();
 
@@ -123,16 +130,10 @@ public class HomeActivity extends AppCompatActivity {
                                 JSONObject productObject = jsonArray.getJSONObject(i);
                                 String name = productObject.getString("name");
                                 String price = productObject.getString("price");
-
-                                // Se agregan las imágenes si están presentes
-                                JSONArray imagesArray = productObject.getJSONArray("images");
-                                List<String> images = new ArrayList<>();
-                                for (int j = 0; j < imagesArray.length(); j++) {
-                                    images.add(imagesArray.getString(j));
-                                }
+                                String image = productObject.getString("image_url");
 
                                 // Crear un objeto Product y agregarlo a la lista
-                                Product product = new Product(name, price, images);
+                                Product product = new Product(name, price, image);
                                 productList.add(product);
                             }
 
@@ -147,6 +148,7 @@ public class HomeActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.e("Volley Error", error.toString()); // Log para errores de Volley
                         Toast.makeText(HomeActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
                     }
                 });

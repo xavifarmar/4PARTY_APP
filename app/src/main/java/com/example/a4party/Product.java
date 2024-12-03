@@ -4,13 +4,13 @@ import java.util.List;
 public class Product {
     private String name;
     private String price;
-    private List<String> images;
+    private String image;
 
     // Constructor
-    public Product(String name, String price, List<String> images) {
+    public Product(String name, String price, String images) {
         this.name = name;
         this.price = price;
-        this.images = images;
+        this.image = images;
     }
 
     // Getters y Setters
@@ -30,11 +30,11 @@ public class Product {
         this.price = price;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 }
