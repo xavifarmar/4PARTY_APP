@@ -11,8 +11,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="411dp"
-        android:layout_height="627dp"
+        android:layout_width="406dp"
+        android:layout_height="600dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +93,8 @@
     <!-- Bloque para el logo con fondo -->
     <LinearLayout
         android:id="@+id/logo_block"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_width="418dp"
+        android:layout_height="87dp"
         android:background="@color/white_grey"
         android:gravity="center"
         android:orientation="vertical"
@@ -107,7 +107,7 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="162dp"
-            android:layout_height="45dp"
+            android:layout_height="65dp"
             android:backgroundTint="@color/red"
             app:srcCompat="@drawable/logo_icon_small"
             app:tint="@color/red" />
@@ -117,7 +117,7 @@
         android:id="@+id/textView2"
         android:layout_width="269dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="monospace"
         android:text="Productos"
@@ -125,5 +125,16 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Bienvenido"
+        android:layout_width="177dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_block" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

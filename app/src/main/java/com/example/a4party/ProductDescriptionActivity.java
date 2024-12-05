@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,14 +20,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.example.a4party.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ProductDescriptionActivity extends AppCompatActivity {
-
     private TextView productName, productPrice;
     private ImageView productImage;
     private LinearLayout variationContainer;
@@ -87,7 +86,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
     private void getColours(String productName) {
-        String url = "http://10.0.2.2/4PARTY/getVariations.php?product_name=" + productName;  // Asegúrate de pasar el nombre correcto
+        String url = "http://10.0.2.2/4PARTY/getVariations.php?";  // Asegúrate de pasar el nombre correcto
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -150,17 +149,17 @@ public class ProductDescriptionActivity extends AppCompatActivity {
     }
 
     // Método auxiliar para obtener un color a partir del nombre (puedes personalizar esto)
-    private int getColorFromName(String colorName) {
-        switch (colorName.toLowerCase()) {
-            case "rojo":
-                return getResources().getColor(android.R.color.holo_red_light);
-            case "azul":
-                return getResources().getColor(android.R.color.holo_blue_light);
-            case "verde":
-                return getResources().getColor(android.R.color.holo_green_light);
+    private int getColorFromName(String color) {
+        switch (color.toLowerCase()) {
+            case "2":
+                return ContextCompat.getColor(this, android.R.color.holo_blue_light); // Asegúrate de tener este color en tus recursos
+            case "3":
+                return ContextCompat.getColor(this, android.R.color.holo_blue_light);
+            case "4":
+                return ContextCompat.getColor(this, android.R.color.holo_green_light);
             // Añadir más colores según sea necesario
             default:
-                return getResources().getColor(android.R.color.darker_gray);  // Color por defecto
+                return ContextCompat.getColor(this, android.R.color.darker_gray);  // Color por defecto
         }
     }
 }
