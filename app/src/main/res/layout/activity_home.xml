@@ -11,8 +11,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="406dp"
-        android:layout_height="600dp"
+        android:layout_width="404dp"
+        android:layout_height="616dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,10 +39,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/home_icon"
-            android:backgroundTint="@android:color/transparent"
             android:background="@drawable/border_selector"
+            android:backgroundTint="@android:color/transparent"
             android:contentDescription="home_button"
+            app:srcCompat="@drawable/home_icon"
             app:tint="@color/white" />
 
         <ImageButton
@@ -93,8 +93,8 @@
     <!-- Bloque para el logo con fondo -->
     <LinearLayout
         android:id="@+id/logo_block"
-        android:layout_width="418dp"
-        android:layout_height="87dp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
         android:background="@color/white_grey"
         android:gravity="center"
         android:orientation="vertical"
@@ -115,25 +115,27 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="269dp"
-        android:layout_height="50dp"
+        android:layout_width="224dp"
+        android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="12dp"
-        android:fontFamily="monospace"
+        android:fontFamily="sans-serif"
         android:text="Productos"
         android:textColor="#000000"
-        android:textSize="34sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/Bienvenido"
-        android:layout_width="177dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:id="@+id/helloTxt"
+        android:layout_width="319dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:text="Bienvenido, Xavi"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_block" />
 
