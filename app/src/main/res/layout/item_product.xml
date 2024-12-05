@@ -7,73 +7,72 @@
 
     <!-- Contenedor principal del Producto con borde y sombra -->
     <LinearLayout
-        android:layout_width="218dp"
-        android:layout_height="319dp"
-        android:layout_margin="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="200dp"
+        android:layout_height="432dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/product_border"
         android:elevation="6dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="wrap">
-
-        <!-- Título del Producto -->
-        <TextView
-            android:id="@+id/product_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="Producto"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Imagen del Producto -->
         <ImageView
             android:id="@+id/image_product"
-            android:layout_width="169dp"
-            android:layout_height="148dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="305dp"
+            android:layout_marginBottom="12dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <!-- Contenedor de Precio y Botón de Like en Horizontal -->
+        <!-- Contenedor de Título y Botón de Like en Horizontal -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="start|end"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_marginBottom="8dp"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal">
 
-            <!-- Precio del Producto alineado a la izquierda -->
-
-            <!-- Botón de Like alineado a la derecha -->
+            <!-- Título del Producto -->
             <TextView
-                android:id="@+id/price_product"
-                android:layout_width="52dp"
+                android:id="@+id/product_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="0.8"
-                android:text="$100"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Producto muy largo que debería truncarse"
                 android:textColor="@android:color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Botón de Like -->
             <ImageButton
                 android:id="@+id/like_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:contentDescription="Like Button"
                 app:srcCompat="@drawable/heart_icon"
                 app:tint="@android:color/black" />
         </LinearLayout>
+
+        <!-- Contenedor de Precio -->
+        <TextView
+            android:id="@+id/price_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="$100"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

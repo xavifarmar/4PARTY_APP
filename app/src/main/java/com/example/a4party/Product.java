@@ -5,6 +5,8 @@ public class Product {
     private String name;
     private String price;
     private String image;
+    private String is_primary;
+
 
     // Constructor
     public Product(String name, String price, String images) {

@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         // Añadir espaciado entre los ítems
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 6, true)); // 16dp de espaciado horizontal y vertical
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 1, true)); // 16dp de espaciado horizontal y vertical
 
 
         // Inicializar la lista de productos

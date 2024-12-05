@@ -11,14 +11,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="463dp"
-        android:layout_height="697dp"
+        android:layout_width="411dp"
+        android:layout_height="627dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/navigation_bar"
@@ -93,7 +94,7 @@
     <LinearLayout
         android:id="@+id/logo_block"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="110dp"
         android:background="@color/white_grey"
         android:gravity="center"
         android:orientation="vertical"
@@ -108,19 +109,21 @@
             android:layout_width="162dp"
             android:layout_height="45dp"
             android:backgroundTint="@color/red"
-            app:tint="@color/red"
-            app:srcCompat="@drawable/logo_icon_small" />
+            app:srcCompat="@drawable/logo_icon_small"
+            app:tint="@color/red" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="269dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="monospace"
         android:text="Productos"
         android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        tools:layout_editor_absoluteX="28dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
