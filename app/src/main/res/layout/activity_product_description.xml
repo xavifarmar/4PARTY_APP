@@ -149,17 +149,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_section">
-        <!-- Aquí se agregarán los botones dinámicamente -->
-
-        <Button
-            android:id="@+id/colorBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/red"
-            android:visibility="visible" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/color_section" />
 
     <Button
         android:id="@+id/button"
