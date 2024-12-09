@@ -61,10 +61,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border_selector"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="cart_button"
             app:srcCompat="@drawable/cart_icon"
-            android:background="@drawable/border_selector"
             app:tint="@color/white" />
 
         <ImageButton
