@@ -144,12 +144,21 @@
         android:id="@+id/variation_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/color_section">
         <!-- Aquí se agregarán los botones dinámicamente -->
+
+        <Button
+            android:id="@+id/colorBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/red"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <Button
@@ -167,5 +176,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/variation_container"
         app:layout_constraintVertical_bias="0.773" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

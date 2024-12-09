@@ -1,6 +1,7 @@
 package com.example.a4party;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -70,14 +71,14 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         });
 
         // Verificamos si la URL de la imagen está presente
-        if (image != null && !image.isEmpty()) {
+              if (image != null && !image.isEmpty()) {
             // Cargar la imagen con Picasso
             Picasso.get()
                     .load(image)  // La URL de la imagen pasada desde el intent
                     .into(productImage);  // Establece la imagen en el ImageView
         } else {
             // Si no hay imagen, ponemos una imagen predeterminada
-            productImage.setImageResource(R.drawable.profile_icon); // Imagen predeterminada
+            productImage.setImageResource(R.drawable.profile_icon);
         }
 
         // Llamamos al método para obtener los colores y variaciones
@@ -86,19 +87,21 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
     private void getColours(String productName) {
-        String url = "http://10.0.2.2/4PARTY/getVariations.php?";  // Asegúrate de pasar el nombre correcto
+        String url = "http://10.0.2.2/4PARTY/getVariations.php?product_name=" + Uri.encode(productName);;  // Asegúrate de pasar el nombre correcto
+        Button colorBtn = findViewById(R.id.colorBtn);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("API Response", response);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             if (jsonResponse.has("product")) {
                                 JSONObject product = jsonResponse.getJSONObject("product");
-                                String name = product.getString("name");
-                                String price = product.getString("price");
-                                String imageUrl = product.getString("image_url");
+                                String name = product.getString("name").toString();
+                                String price = product.getString("price").toString();
+                                String imageUrl = product.getString("image_url").toString();
 
                                 // Establecer los datos del producto en la UI
                                 productPrice.setText(price);
