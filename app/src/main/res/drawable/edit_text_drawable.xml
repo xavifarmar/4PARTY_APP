@@ -3,11 +3,11 @@
     android:shape="rectangle">
 
     <!-- Fondo del EditText -->
-    <solid android:color="#C0525050" />
+    <solid android:color="#C0C3C3C3" />
     <!-- Borde del EditText -->
     <stroke
         android:width="2dp"
-        android:color="#626060" />
+        android:color="#9E9E9E" />
 
     <!-- Esquinas redondeadas -->
     <corners android:radius="4dp" />
