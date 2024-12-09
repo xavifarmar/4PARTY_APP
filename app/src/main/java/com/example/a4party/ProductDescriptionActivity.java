@@ -87,8 +87,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
     private void getColours(String productName) {
-        String url = "http://10.0.2.2/4PARTY/getVariations.php?product_name=" + Uri.encode(productName);;  // Asegúrate de pasar el nombre correcto
-        Button colorBtn = findViewById(R.id.colorBtn);
+        String url = "http://10.0.2.2/4PARTY/getVariations.php?product_name=" + Uri.encode(productName);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -99,13 +98,13 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             if (jsonResponse.has("product")) {
                                 JSONObject product = jsonResponse.getJSONObject("product");
-                                String name = product.getString("name").toString();
-                                String price = product.getString("price").toString();
-                                String imageUrl = product.getString("image_url").toString();
+                                String name = product.getString("name");
+                                String price = product.getString("price");
+                                String imageUrl = product.getString("image_url");
 
                                 // Establecer los datos del producto en la UI
                                 productPrice.setText(price);
-                                Picasso.get().load(imageUrl).into(productImage);  // Cargar imagen
+                                Picasso.get().load(imageUrl).into(productImage);
 
                                 // Procesar las variaciones si existen
                                 JSONArray variations = jsonResponse.getJSONArray("variations");
@@ -114,12 +113,26 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                                     String color = variation.getString("color");
                                     String variationImage = variation.getString("image_url");
 
-                                    // Crear un botón para cada variación
-                                    Button colorButton = new Button(ProductDescriptionActivity.this);
-                                    colorButton.setText(color);  // Establecer el nombre del color como texto
-                                    colorButton.setBackgroundColor(getColorFromName(color));  // Establecer un color de fondo basado en el nombre (si es aplicable)
 
-                                    // Establecer un listener para que cambie la imagen cuando se seleccione una variación
+                                    int colorInt = getColor(color);
+
+
+                                    // Crear un botón con la plantilla de fondo
+                                    Button colorButton = new Button(ProductDescriptionActivity.this);
+
+                                    colorButton.setBackgroundResource(R.drawable.button_template);  // Aplicar la plantilla de botón
+                                    colorButton.setBackgroundColor(colorInt);
+
+                                    // Establecer un tamaño específico para los botones
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.WRAP_CONTENT,  // Ancho
+                                            LinearLayout.LayoutParams.WRAP_CONTENT   // Alto
+                                    );
+                                    params.setMargins(10, 10, 10, 10);  // Márgenes (izquierda, arriba, derecha, abajo)
+                                    colorButton.setLayoutParams(params);
+
+
+                                    // Establecer un listener para cambiar la imagen cuando se seleccione una variación
                                     colorButton.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -129,6 +142,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                                     });
 
                                     // Añadir el botón al contenedor de variaciones
+                                    LinearLayout variationContainer = findViewById(R.id.variation_container);
                                     variationContainer.addView(colorButton);
                                 }
                             } else {
@@ -151,16 +165,41 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    // Método auxiliar para obtener un color a partir del nombre (puedes personalizar esto)
-    private int getColorFromName(String color) {
+    // Método auxiliar para obtener un color a partir del nombre
+    public int getColor(String color) {
         switch (color.toLowerCase()) {
-            case "2":
-                return ContextCompat.getColor(this, android.R.color.holo_blue_light); // Asegúrate de tener este color en tus recursos
-            case "3":
-                return ContextCompat.getColor(this, android.R.color.holo_blue_light);
-            case "4":
-                return ContextCompat.getColor(this, android.R.color.holo_green_light);
-            // Añadir más colores según sea necesario
+            case "1": // Rojo
+                return ContextCompat.getColor(this, R.color.color_rojo);
+            case "2": // Azul Marino
+                return ContextCompat.getColor(this, R.color.color_azul_marino);
+            case "3": // Negro
+                return ContextCompat.getColor(this, R.color.color_negro);
+            case "4": // Blanco
+                return ContextCompat.getColor(this, R.color.color_blanco);
+            case "5": // Dorado
+                return ContextCompat.getColor(this, R.color.color_dorado);
+            case "6": // Plateado
+                return ContextCompat.getColor(this, R.color.color_plateado);
+            case "7": // Verde
+                return ContextCompat.getColor(this, R.color.color_verde);
+            case "8": // Rosa
+                return ContextCompat.getColor(this, R.color.color_rosa);
+            case "9": // Morado
+                return ContextCompat.getColor(this, R.color.color_morado);
+            case "10": // Gris
+                return ContextCompat.getColor(this, R.color.color_gris);
+            case "11": // Amarillo
+                return ContextCompat.getColor(this, R.color.color_amarillo);
+            case "12": // Naranja
+                return ContextCompat.getColor(this, R.color.color_naranja);
+            case "13": // Beige
+                return ContextCompat.getColor(this, R.color.color_beige);
+            case "14": // Vino
+                return ContextCompat.getColor(this, R.color.color_vino);
+            case "15": // Turquesa
+                return ContextCompat.getColor(this, R.color.color_turquesa);
+            case "16": // Marrón
+                return ContextCompat.getColor(this, R.color.color_marron);
             default:
                 return ContextCompat.getColor(this, android.R.color.darker_gray);  // Color por defecto
         }

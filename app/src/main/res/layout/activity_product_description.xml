@@ -146,7 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/color_section">
@@ -157,7 +157,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/red"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </LinearLayout>
 

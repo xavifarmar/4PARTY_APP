@@ -5,4 +5,24 @@
     <color name="red">#950909</color>
     <color name="grey">#D9D9D9</color>
     <color name="white_grey">#eae8e9</color>
+
+    <!-- Colores definidos por el usuario -->
+    <color name="color_rojo">#FF0000</color>       <!-- Rojo -->
+    <color name="color_azul_marino">#000080</color> <!-- Azul Marino -->
+    <color name="color_negro">#000000</color>      <!-- Negro -->
+    <color name="color_blanco">#FFFFFF</color>     <!-- Blanco -->
+    <color name="color_dorado">#FFD700</color>     <!-- Dorado -->
+    <color name="color_plateado">#C0C0C0</color>   <!-- Plateado -->
+    <color name="color_verde">#008000</color>      <!-- Verde -->
+    <color name="color_rosa">#FFC0CB</color>       <!-- Rosa -->
+    <color name="color_morado">#800080</color>     <!-- Morado -->
+    <color name="color_gris">#808080</color>       <!-- Gris -->
+    <color name="color_amarillo">#FFFF00</color>   <!-- Amarillo -->
+    <color name="color_naranja">#FFA500</color>    <!-- Naranja -->
+    <color name="color_beige">#F5F5DC</color>      <!-- Beige -->
+    <color name="color_vino">#800000</color>       <!-- Vino -->
+    <color name="color_turquesa">#40E0D0</color>   <!-- Turquesa -->
+    <color name="color_marron">#A52A2A</color>     <!-- Marrón -->
+
+
 </resources>
