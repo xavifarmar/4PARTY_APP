@@ -26,10 +26,17 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductDescriptionActivity extends AppCompatActivity {
     private TextView productName, productPrice;
     private ImageView productImage;
     private LinearLayout variationContainer;
+    private Button addToCart;
+    private List<Cart> cartList;
+    private String name, price, color, imageUrl;
+    private Boolean isProductInCart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +49,31 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         productImage = findViewById(R.id.product_image);
         variationContainer = findViewById(R.id.variation_container);  // Contenedor para las variaciones
         ImageButton likeBtn = findViewById(R.id.likeBtn);
+        addToCart = findViewById(R.id.addToCartBtn);
+
+        //Iniciar el carrito
+        cartList = new ArrayList<>();
 
         likeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 likeBtn.setBackgroundTintList(ColorStateList.valueOf(950909)); // Color del like
+            }
+        });
+
+        addToCart.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isProductInCart){
+                    addToCart.setText("Eliminar del carrito");
+                    addToCart(name, price, color);
+                    isProductInCart = true;
+                }else {
+                    addToCart.setText("Añadir al carrito");
+                    removeFromCart(name, color);
+                    isProductInCart = false;
+                }
+
             }
         });
 
@@ -98,9 +125,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             if (jsonResponse.has("product")) {
                                 JSONObject product = jsonResponse.getJSONObject("product");
-                                String name = product.getString("name");
-                                String price = product.getString("price");
-                                String imageUrl = product.getString("image_url");
+                                 name = product.getString("name");
+                                 price = product.getString("price");
+                                 imageUrl = product.getString("image_url");
 
                                 // Establecer los datos del producto en la UI
                                 productPrice.setText(price);
@@ -204,4 +231,21 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                 return ContextCompat.getColor(this, android.R.color.darker_gray);  // Color por defecto
         }
     }
+
+
+    public void addToCart(String name, String price, String color){
+        Cart cartProduct = new Cart( name, 1, "M", price, color);
+        cartList.add(cartProduct);
+
+
+
+    }
+
+    public void removeFromCart(name, color){
+
+    }
+
+
+
+
 }
