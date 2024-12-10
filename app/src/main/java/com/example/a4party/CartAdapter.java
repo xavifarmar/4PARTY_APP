@@ -4,19 +4,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     private List<Cart> cartList;
-    private OnQuantityChangedListener quantityChangedListener;
 
-    public CartAdapter(List<Cart> cartList, OnQuantityChangedListener quantityChangedListener) {
+    // Constructor que recibe la lista de productos en el carrito
+    public CartAdapter(List<Cart> cartList) {
         this.cartList = cartList;
-        this.quantityChangedListener = quantityChangedListener;
     }
 
     @Override
@@ -28,18 +31,29 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
         Cart cart = cartList.get(position);
+
+        // Asignar los datos del producto al viewHolder
         holder.productName.setText(cart.getProduct_name());
         holder.quantity.setText(String.valueOf(cart.getQuantity()));
         holder.size.setText(cart.getSize());
         holder.price.setText(cart.getPrice());
         holder.color.setText(cart.getColor());
+        String imageUrl = cart.getImage_url();
+
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Picasso.get().load(imageUrl).into(holder.productImage);
+        } else {
+            holder.productImage.setImageResource(R.drawable.profile_icon); // Imagen por defecto
+        }
 
         // Listener para los botones de aumentar/disminuir cantidad
         holder.btnIncrease.setOnClickListener(v -> {
             int newQuantity = cart.getQuantity() + 1;
             cart.setQuantity(newQuantity);
             holder.quantity.setText(String.valueOf(newQuantity));
-            quantityChangedListener.onQuantityChanged(cart);
+
+            // Notificar al adaptador que se actualizó el item
+            notifyItemChanged(position); // Solo actualizar el item que se modificó
         });
 
         holder.btnDecrease.setOnClickListener(v -> {
@@ -47,7 +61,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 int newQuantity = cart.getQuantity() - 1;
                 cart.setQuantity(newQuantity);
                 holder.quantity.setText(String.valueOf(newQuantity));
-                quantityChangedListener.onQuantityChanged(cart);
+
+                // Notificar al adaptador que se actualizó el item
+                notifyItemChanged(position); // Solo actualizar el item que se modificó
             }
         });
     }
@@ -61,20 +77,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         TextView productName, quantity, size, price, color;
         Button btnIncrease, btnDecrease;
+        ImageView productImage;
 
         public CartViewHolder(View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productNameTxt);
             quantity = itemView.findViewById(R.id.ProductQuantityTxt);
             size = itemView.findViewById(R.id.ProductSizeTxt);
-            price = itemView.findViewById(R.id.product_price);
+            price = itemView.findViewById(R.id.ProductPriceTxt);
             color = itemView.findViewById(R.id.ProductColorTxt);
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
         }
     }
 
-    public interface OnQuantityChangedListener {
-        void onQuantityChanged(Cart cart);
+    // Método para actualizar la lista del carrito (puedes usarlo si cambias la lista desde la actividad)
+    public void updateCartList(List<Cart> newCartList) {
+        this.cartList = newCartList;
+        notifyDataSetChanged();  // Actualiza toda la lista en el RecyclerView
     }
 }

@@ -25,7 +25,7 @@
             android:src="@drawable/profile_icon"
             android:scaleType="centerCrop" />
 
-        <!-- Detalles del producto (nombre, color, tamaño) -->
+        <!-- Detalles del producto (nombre, color, tamaño, precio) -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
@@ -56,7 +56,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Size: M"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Precio del producto -->
+            <TextView
+                android:id="@+id/ProductPriceTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: $50.00"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
         </LinearLayout>
 
         <!-- Contenedor de cantidad -->
@@ -94,8 +105,7 @@
                 android:text="-"
                 android:textSize="20sp"
                 android:textColor="@color/white"
-                android:background="@color/red"
-               />
+                android:background="@color/red" />
         </LinearLayout>
     </LinearLayout>
 

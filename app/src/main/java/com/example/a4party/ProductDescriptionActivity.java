@@ -1,4 +1,5 @@
 package com.example.a4party;
+
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
@@ -29,12 +30,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDescriptionActivity extends AppCompatActivity {
+public class ProductDescriptionActivity extends AppCompatActivity{
     private TextView productName, productPrice;
     private ImageView productImage;
     private LinearLayout variationContainer;
     private Button addToCart;
-    private List<Cart> cartList;
     private String name, price, color, imageUrl;
     private Boolean isProductInCart = false;
 
@@ -51,54 +51,18 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         ImageButton likeBtn = findViewById(R.id.likeBtn);
         addToCart = findViewById(R.id.addToCartBtn);
 
-        //Iniciar el carrito
-        cartList = new ArrayList<>();
-
-        likeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                likeBtn.setBackgroundTintList(ColorStateList.valueOf(950909)); // Color del like
-            }
-        });
-
-        addToCart.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                if (!isProductInCart){
-                    addToCart.setText("Eliminar del carrito");
-                    addToCart(name, price, color);
-                    isProductInCart = true;
-                }else {
-                    addToCart.setText("Añadir al carrito");
-                    removeFromCart();
-                    isProductInCart = false;
-                }
-
-            }
-        });
-
         // Recuperamos los datos del Intent
         Intent intent = getIntent();
-        String name = intent.getStringExtra("product_name");
-        String price = intent.getStringExtra("product_price");
+        name = intent.getStringExtra("product_name");
+        price = intent.getStringExtra("product_price");
         String image = intent.getStringExtra("product_image");
 
         // Establecemos los valores de nombre y precio
         productName.setText(name);
         productPrice.setText(price);
 
-        // Botón para volver a la pantalla anterior
-        Button backButton = findViewById(R.id.backBtn);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProductDescriptionActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
-
         // Verificamos si la URL de la imagen está presente
-              if (image != null && !image.isEmpty()) {
+        if (image != null && !image.isEmpty()) {
             // Cargar la imagen con Picasso
             Picasso.get()
                     .load(image)  // La URL de la imagen pasada desde el intent
@@ -110,6 +74,32 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
         // Llamamos al método para obtener los colores y variaciones
         getColours(name);
+
+        // Botón para agregar el producto al carrito
+        addToCart.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if (!isProductInCart){
+                    addToCart.setText("Eliminar del carrito");
+                    addToCartToSingleton(name, price, color, imageUrl);  // Usamos el Singleton para añadir el producto
+                    isProductInCart = true;
+                } else {
+                    addToCart.setText("Añadir al carrito");
+                    removeFromCart();  // Aquí implementaremos la lógica para eliminar del carrito si es necesario
+                    isProductInCart = false;
+                }
+            }
+        });
+
+        // Botón de "Atrás" para regresar a la actividad anterior
+        Button backButton = findViewById(R.id.backBtn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductDescriptionActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
@@ -125,9 +115,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             if (jsonResponse.has("product")) {
                                 JSONObject product = jsonResponse.getJSONObject("product");
-                                 name = product.getString("name");
-                                 price = product.getString("price");
-                                 imageUrl = product.getString("image_url");
+                                name = product.getString("name");
+                                price = product.getString("price");
+                                imageUrl = product.getString("image_url");
 
                                 // Establecer los datos del producto en la UI
                                 productPrice.setText(price);
@@ -140,13 +130,10 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                                     String color = variation.getString("color");
                                     String variationImage = variation.getString("image_url");
 
-
                                     int colorInt = getColor(color);
-
 
                                     // Crear un botón con la plantilla de fondo
                                     Button colorButton = new Button(ProductDescriptionActivity.this);
-
                                     colorButton.setBackgroundResource(R.drawable.button_template);  // Aplicar la plantilla de botón
                                     colorButton.setBackgroundColor(colorInt);
 
@@ -155,25 +142,21 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                                             LinearLayout.LayoutParams.WRAP_CONTENT,  // Ancho
                                             LinearLayout.LayoutParams.WRAP_CONTENT   // Alto
                                     );
-                                    params.setMargins(10, 10, 10, 10);  // Márgenes (izquierda, arriba, derecha, abajo)
+                                    params.setMargins(10, 10, 10, 10);  // Márgenes
                                     colorButton.setLayoutParams(params);
-
 
                                     // Establecer un listener para cambiar la imagen cuando se seleccione una variación
                                     colorButton.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            // Cambiar la imagen al hacer clic en el botón
                                             Picasso.get().load(variationImage).into(productImage);
                                         }
                                     });
 
                                     // Añadir el botón al contenedor de variaciones
-                                    LinearLayout variationContainer = findViewById(R.id.variation_container);
                                     variationContainer.addView(colorButton);
                                 }
                             } else {
-                                // Manejar el caso cuando no se encuentren resultados
                                 Log.e("Product", "No se encontraron productos");
                             }
                         } catch (Exception e) {
@@ -195,55 +178,35 @@ public class ProductDescriptionActivity extends AppCompatActivity {
     // Método auxiliar para obtener un color a partir del nombre
     public int getColor(String color) {
         switch (color.toLowerCase()) {
-            case "1": // Rojo
-                return ContextCompat.getColor(this, R.color.color_rojo);
-            case "2": // Azul Marino
-                return ContextCompat.getColor(this, R.color.color_azul_marino);
-            case "3": // Negro
-                return ContextCompat.getColor(this, R.color.color_negro);
-            case "4": // Blanco
-                return ContextCompat.getColor(this, R.color.color_blanco);
-            case "5": // Dorado
-                return ContextCompat.getColor(this, R.color.color_dorado);
-            case "6": // Plateado
-                return ContextCompat.getColor(this, R.color.color_plateado);
-            case "7": // Verde
-                return ContextCompat.getColor(this, R.color.color_verde);
-            case "8": // Rosa
-                return ContextCompat.getColor(this, R.color.color_rosa);
-            case "9": // Morado
-                return ContextCompat.getColor(this, R.color.color_morado);
-            case "10": // Gris
-                return ContextCompat.getColor(this, R.color.color_gris);
-            case "11": // Amarillo
-                return ContextCompat.getColor(this, R.color.color_amarillo);
-            case "12": // Naranja
-                return ContextCompat.getColor(this, R.color.color_naranja);
-            case "13": // Beige
-                return ContextCompat.getColor(this, R.color.color_beige);
-            case "14": // Vino
-                return ContextCompat.getColor(this, R.color.color_vino);
-            case "15": // Turquesa
-                return ContextCompat.getColor(this, R.color.color_turquesa);
-            case "16": // Marrón
-                return ContextCompat.getColor(this, R.color.color_marron);
-            default:
-                return ContextCompat.getColor(this, android.R.color.darker_gray);  // Color por defecto
+            case "1": return ContextCompat.getColor(this, R.color.color_rojo);
+            case "2": return ContextCompat.getColor(this, R.color.color_azul_marino);
+            case "3": return ContextCompat.getColor(this, R.color.color_negro);
+            case "4": return ContextCompat.getColor(this, R.color.color_blanco);
+            case "5": return ContextCompat.getColor(this, R.color.color_dorado);
+            case "6": return ContextCompat.getColor(this, R.color.color_plateado);
+            case "7": return ContextCompat.getColor(this, R.color.color_verde);
+            case "8": return ContextCompat.getColor(this, R.color.color_rosa);
+            case "9": return ContextCompat.getColor(this, R.color.color_morado);
+            case "10": return ContextCompat.getColor(this, R.color.color_gris);
+            case "11": return ContextCompat.getColor(this, R.color.color_amarillo);
+            case "12": return ContextCompat.getColor(this, R.color.color_naranja);
+            case "13": return ContextCompat.getColor(this, R.color.color_beige);
+            case "14": return ContextCompat.getColor(this, R.color.color_vino);
+            case "15": return ContextCompat.getColor(this, R.color.color_turquesa);
+            case "16": return ContextCompat.getColor(this, R.color.color_marron);
+            default: return ContextCompat.getColor(this, android.R.color.darker_gray);
         }
     }
 
-
-    public void addToCart(String name, String price, String color){
-        Cart cartProduct = new Cart( name, 1, "M", price, color);
-        cartList.add(cartProduct);
-
+    // Método para añadir el producto al carrito utilizando el Singleton
+    public void addToCartToSingleton(String name, String price, String color, String imageUrl) {
+        Cart cartProduct = new Cart(name, 1, "M", price, color, imageUrl);
+        CartSingleton.getInstance().addProductToCart(cartProduct);  // Usamos el Singleton para añadir al carrito
     }
 
-    public void removeFromCart(){
-
+    // Método para eliminar el producto del carrito
+    public void removeFromCart() {
+        Cart cartProduct = new Cart(name, 1, "M", price, color, imageUrl);
+        CartSingleton.getInstance().removeProductFromCart(cartProduct);  // Eliminar producto usando Singleton
     }
-
-
-
-
 }
