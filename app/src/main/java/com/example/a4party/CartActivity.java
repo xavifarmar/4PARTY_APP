@@ -35,6 +35,10 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
         cartAdapter = new CartAdapter(cartList, this);
         recyclerView.setAdapter(cartAdapter);
 
+        // Añadir productos al carrito de ejemplo
+        addProductToCart("Producto 1", "M", "$20", "Rojo");
+        addProductToCart("Producto 2", "L", "$15", "Azul");
+
         // Referencia a los botones
         ImageButton likes_btn = findViewById(R.id.heart_btn);
         ImageButton profile_btn = findViewById(R.id.profile_btn);
@@ -81,10 +85,16 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnQua
 
     }
 
+
+
     @Override
     public void onQuantityChanged(Cart cart) {
         // Aquí puedes manejar los cambios de cantidad, por ejemplo, actualizar la base de datos
         // o la lista que contiene el carrito de compras.
         // Si quisieras actualizar la vista en general o realizar algún otro cambio, este es el lugar.
+    }
+    private void addProductToCart(String productName, String size, String price, String color) {
+        // Añadir producto al carrito
+        cartList.add(new Cart(productName, 1, size, price, color));
     }
 }
