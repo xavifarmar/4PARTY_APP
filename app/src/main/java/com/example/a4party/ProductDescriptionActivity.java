@@ -70,7 +70,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
                     isProductInCart = true;
                 }else {
                     addToCart.setText("Añadir al carrito");
-                    removeFromCart(name, color);
+                    removeFromCart();
                     isProductInCart = false;
                 }
 
@@ -237,11 +237,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         Cart cartProduct = new Cart( name, 1, "M", price, color);
         cartList.add(cartProduct);
 
-
-
     }
 
-    public void removeFromCart(name, color){
+    public void removeFromCart(){
 
     }
 

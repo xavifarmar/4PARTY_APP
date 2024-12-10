@@ -7,13 +7,33 @@ import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class CartActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CartActivity extends AppCompatActivity implements CartAdapter.OnQuantityChangedListener{
+
+    private RecyclerView recyclerView;
+    private CartAdapter cartAdapter;
+    private List<Cart> cartList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cart);
+
+        //Iniciar la lista de productos del carrito
+        cartList = new ArrayList<>();
+
+        //Configurar el recycler View
+        recyclerView = findViewById(R.id.cartRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Crea el adaptador y asigna al RecyclerView
+        cartAdapter = new CartAdapter(cartList, this);
+        recyclerView.setAdapter(cartAdapter);
 
         // Referencia a los botones
         ImageButton likes_btn = findViewById(R.id.heart_btn);
@@ -59,5 +79,12 @@ public class CartActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onQuantityChanged(Cart cart) {
+        // Aquí puedes manejar los cambios de cantidad, por ejemplo, actualizar la base de datos
+        // o la lista que contiene el carrito de compras.
+        // Si quisieras actualizar la vista en general o realizar algún otro cambio, este es el lugar.
     }
 }
