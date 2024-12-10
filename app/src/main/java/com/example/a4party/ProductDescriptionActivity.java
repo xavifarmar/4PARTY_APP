@@ -2,6 +2,7 @@ package com.example.a4party;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -132,10 +133,13 @@ public class ProductDescriptionActivity extends AppCompatActivity{
 
                                     int colorInt = getColor(color);
 
-                                    // Crear un botón con la plantilla de fondo
+                                    // Primero, carga la plantilla del botón
                                     Button colorButton = new Button(ProductDescriptionActivity.this);
-                                    colorButton.setBackgroundResource(R.drawable.button_template);  // Aplicar la plantilla de botón
-                                    colorButton.setBackgroundColor(colorInt);
+                                    colorButton.setBackgroundResource(R.drawable.button_template);  // Aplica la plantilla de fondo
+
+// Modificar dinámicamente el color de fondo del botón
+                                    GradientDrawable drawable = (GradientDrawable) colorButton.getBackground();
+                                    drawable.setColor(colorInt);  // Cambiar el color del fondo usando colorInt (el color dinámico)
 
                                     // Establecer un tamaño específico para los botones
                                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
