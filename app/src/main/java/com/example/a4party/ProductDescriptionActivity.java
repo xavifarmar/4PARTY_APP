@@ -1,7 +1,6 @@
 package com.example.a4party;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,9 +34,10 @@ public class ProductDescriptionActivity extends AppCompatActivity{
     private TextView productName, productPrice;
     private ImageView productImage;
     private LinearLayout variationContainer;
-    private Button addToCart;
-    private String name, price, color, imageUrl;
+    private Button addToCart, sizeS, sizeM, sizeL;
+    private String name, price, color, imageUrl, size;
     private Boolean isProductInCart = false;
+    private String selectedSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,10 @@ public class ProductDescriptionActivity extends AppCompatActivity{
         variationContainer = findViewById(R.id.variation_container);  // Contenedor para las variaciones
         ImageButton likeBtn = findViewById(R.id.likeBtn);
         addToCart = findViewById(R.id.addToCartBtn);
+        sizeS = findViewById(R.id.size_s);
+        sizeM = findViewById(R.id.size_m);
+        sizeL = findViewById(R.id.size_l);
+
 
         // Recuperamos los datos del Intent
         Intent intent = getIntent();
@@ -81,12 +85,12 @@ public class ProductDescriptionActivity extends AppCompatActivity{
             @Override
             public void onClick(View view){
                 if (!isProductInCart){
-                    addToCart.setText("Eliminar del carrito");
-                    addToCartToSingleton(name, price, color, imageUrl);  // Usamos el Singleton para añadir el producto
+                    addToCart();
+                   // addToCartToSingleton(name, price, color, imageUrl);  // Usamos el Singleton para añadir el producto
                     isProductInCart = true;
                 } else {
-                    addToCart.setText("Añadir al carrito");
-                    removeFromCart();  // Aquí implementaremos la lógica para eliminar del carrito si es necesario
+
+                  //  removeFromCart();  // Aquí implementaremos la lógica para eliminar del carrito si es necesario
                     isProductInCart = false;
                 }
             }
@@ -101,7 +105,32 @@ public class ProductDescriptionActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+        sizeS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedSize = "S";  // Set the selected size to "S"
+                Log.d("Size", "Selected Size: " + selectedSize);
+            }
+        });
+
+        sizeM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedSize = "M";  // Set the selected size to "M"
+                Log.d("Size", "Selected Size: " + selectedSize);
+            }
+        });
+
+        sizeL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedSize = "L";  // Set the selected size to "L"
+                Log.d("Size", "Selected Size: " + selectedSize);
+            }
+        });
+
     }
+
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
     private void getColours(String productName) {
@@ -130,14 +159,14 @@ public class ProductDescriptionActivity extends AppCompatActivity{
                                     JSONObject variation = variations.getJSONObject(i);
                                     String color = variation.getString("color");
                                     String variationImage = variation.getString("image_url");
-
+                                    
                                     int colorInt = getColor(color);
 
                                     // Primero, carga la plantilla del botón
                                     Button colorButton = new Button(ProductDescriptionActivity.this);
                                     colorButton.setBackgroundResource(R.drawable.button_template);  // Aplica la plantilla de fondo
 
-// Modificar dinámicamente el color de fondo del botón
+                                    // Modificar dinámicamente el color de fondo del botón
                                     GradientDrawable drawable = (GradientDrawable) colorButton.getBackground();
                                     drawable.setColor(colorInt);  // Cambiar el color del fondo usando colorInt (el color dinámico)
 
@@ -203,8 +232,8 @@ public class ProductDescriptionActivity extends AppCompatActivity{
     }
 
     // Método para añadir el producto al carrito utilizando el Singleton
-    public void addToCartToSingleton(String name, String price, String color, String imageUrl) {
-        Cart cartProduct = new Cart(name, 1, "M", price, color, imageUrl);
+    /*public void addToCartToSingleton(String name, String price, String color, String imageUrl) {
+        Cart cartProduct = new Cart(name, 1, selectedSize, price, color, imageUrl);
         CartSingleton.getInstance().addProductToCart(cartProduct);  // Usamos el Singleton para añadir al carrito
     }
 
@@ -212,5 +241,61 @@ public class ProductDescriptionActivity extends AppCompatActivity{
     public void removeFromCart() {
         Cart cartProduct = new Cart(name, 1, "M", price, color, imageUrl);
         CartSingleton.getInstance().removeProductFromCart(cartProduct);  // Eliminar producto usando Singleton
+    }*/
+
+
+    public void addToCart(){
+        // URL del archivo PHP que maneja la solicitud
+        String url = "http://10.0.2.2/4PARTY/addToCart.php?action=addToCart";
+
+        // Crear la solicitud POST con StringRequest
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("API Response", response); // Imprime la respuesta para depuración
+                        try {
+                            // Procesar la respuesta JSON del servidor
+                            JSONObject jsonResponse = new JSONObject(response);
+                            String status = jsonResponse.getString("status");
+                            String message = jsonResponse.getString("message");
+
+                            if (status.equals("success")) {
+                                Log.d("AddToCart", "Product added: " + message);
+                                // Aquí puedes actualizar la UI, como cambiar el texto del botón
+                                addToCart.setText("Eliminar del carrito");
+                            } else {
+                                Log.e("AddToCart", "Error: " + message);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Manejo de errores
+                        Log.e("AddToCart", "Request failed: " + error.toString());
+                    }
+                }) {
+
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                // Crear los parámetros que se enviarán al servidor
+                java.util.Map<String, String> params = new java.util.HashMap<>();
+                params.put("product_name", name);
+                params.put("color_id", "3");
+                params.put("size", selectedSize);
+                return params;
+            }
+        };
+
+        // Crear una cola de solicitudes
+        RequestQueue queue = Volley.newRequestQueue(this);
+        // Añadir la solicitud a la cola
+        queue.add(stringRequest);
     }
+
 }
+

@@ -2,6 +2,7 @@ package com.example.a4party;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -9,6 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
@@ -21,6 +33,7 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        viewCart();
 
         // Inicializamos el RecyclerView
         recyclerView = findViewById(R.id.cartRecyclerView);
@@ -71,5 +84,69 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    public void viewCart(){
+
+        String url = "http://10.0.2.2/4PARTY/addToCart.php?action=getCartProducts" ;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("CartData", response);  // Ver respuesta del servidor
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            JSONArray cartItems = jsonResponse.getJSONArray("cart_items");
+
+                            List<Cart> cartList = new ArrayList<>();
+
+                            // Procesar cada item del carrito
+                            for (int i = 0; i < cartItems.length(); i++) {
+                                JSONObject cartItem = cartItems.getJSONObject(i);
+                                String name = cartItem.getString("product_name");
+                                String price = cartItem.getString("price");
+
+                                //Pasar el price a int
+                                int intPrice = Integer.parseInt(price);
+
+                                String imageUrl = cartItem.getString("image_url");
+                                String size = cartItem.getString("size");
+                                String quantity = cartItem.getString("quantity");
+                                String color = cartItem.getString("color");
+
+                                // Crear un objeto CartItem con los datos obtenidos
+                                Cart cartProduct = new Cart(name, intPrice, imageUrl, size, quantity, color);
+
+                                // Agregar el producto al carrito
+                                cartList.add(cartProduct);
+                            }
+
+                            // Llamamos a una función para actualizar el RecyclerView con los datos
+                            updateCartRecyclerView(cartList);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error", "Error in request: " + error.toString());
+                    }
+                });
+
+        // Crear una cola de solicitudes
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
+    }
+    public void updateCartRecyclerView(List<Cart> cartList) {
+        // Inicializamos el RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.cartRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Creamos el adaptador con la lista de productos
+        CartAdapter cartAdapter = new CartAdapter(cartList);
+        recyclerView.setAdapter(cartAdapter);
     }
 }
