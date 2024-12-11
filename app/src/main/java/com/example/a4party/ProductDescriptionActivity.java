@@ -246,7 +246,7 @@ public class ProductDescriptionActivity extends AppCompatActivity{
 
     public void addToCart(){
         // URL del archivo PHP que maneja la solicitud
-        String url = "http://10.0.2.2/4PARTY/addToCart.php?action=addToCart";
+        String url = "http://10.0.2.2/4PARTY/addToCart.php";
 
         // Crear la solicitud POST con StringRequest
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,

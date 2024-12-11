@@ -87,7 +87,7 @@ public class CartActivity extends AppCompatActivity {
     }
     public void viewCart(){
 
-        String url = "http://10.0.2.2/4PARTY/addToCart.php?action=getCartProducts" ;
+        String url = "http://10.0.2.2/4PARTY/viewCart.php" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -103,19 +103,22 @@ public class CartActivity extends AppCompatActivity {
                             // Procesar cada item del carrito
                             for (int i = 0; i < cartItems.length(); i++) {
                                 JSONObject cartItem = cartItems.getJSONObject(i);
+
                                 String name = cartItem.getString("product_name");
                                 String price = cartItem.getString("price");
 
-                                //Pasar el price a int
-                                int intPrice = Integer.parseInt(price);
 
                                 String imageUrl = cartItem.getString("image_url");
                                 String size = cartItem.getString("size");
-                                String quantity = cartItem.getString("quantity");
+                                int quantity = cartItem.getInt("quantity");
                                 String color = cartItem.getString("color");
 
+
+                                //ESTRUCTURA DEL CONSTRUCTOR
+                                //(String product_name, int quantity, String size, String price, String color, String image_url)
+
                                 // Crear un objeto CartItem con los datos obtenidos
-                                Cart cartProduct = new Cart(name, intPrice, imageUrl, size, quantity, color);
+                                Cart cartProduct = new Cart(name, quantity ,size, price, color, imageUrl);
 
                                 // Agregar el producto al carrito
                                 cartList.add(cartProduct);

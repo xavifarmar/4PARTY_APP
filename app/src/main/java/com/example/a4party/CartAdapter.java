@@ -1,5 +1,6 @@
 package com.example.a4party;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +35,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(CartViewHolder holder, int position) {
         Cart cart = cartList.get(position);
 
+        // Imprimir valores para depurar
+        Log.d("CartAdapter", "Producto: " + cart.getProduct_name());
+        Log.d("CartAdapter", "Cantidad: " + cart.getQuantity());
+        Log.d("CartAdapter", "Tamaño: " + cart.getSize());
+        Log.d("CartAdapter", "Precio: " + cart.getPrice());
+        Log.d("CartAdapter", "Color: " + cart.getColor());
+        Log.d("CartAdapter", "Imagen URL: " + cart.getImage_url());
+
         // Asignar los datos del producto al viewHolder
         holder.productName.setText(cart.getProduct_name());
-        holder.quantity.setText(String.valueOf(cart.getQuantity()));
-        holder.size.setText(cart.getSize());
         holder.price.setText(cart.getPrice());
         holder.color.setText(cart.getColor());
+        holder.size.setText(cart.getSize());
         String imageUrl = cart.getImage_url();
 
         if (imageUrl != null && !imageUrl.isEmpty()) {
@@ -47,6 +55,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         } else {
             holder.productImage.setImageResource(R.drawable.profile_icon); // Imagen por defecto
         }
+        holder.quantity.setText(String.valueOf(cart.getQuantity()));
 
         // Listener para los botones de aumentar/disminuir cantidad
         holder.btnIncrease.setOnClickListener(v -> {
@@ -83,12 +92,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         public CartViewHolder(View itemView) {
             super(itemView);
+            productImage = itemView.findViewById(R.id.productImage);
             productName = itemView.findViewById(R.id.productNameTxt);
             quantity = itemView.findViewById(R.id.ProductQuantityTxt);
             size = itemView.findViewById(R.id.ProductSizeTxt);
             price = itemView.findViewById(R.id.ProductPriceTxt);
             color = itemView.findViewById(R.id.ProductColorTxt);
-            productImage = itemView.findViewById(R.id.productImage);
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
         }
