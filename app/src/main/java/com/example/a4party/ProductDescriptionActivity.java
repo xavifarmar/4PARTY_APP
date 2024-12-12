@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -30,14 +33,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDescriptionActivity extends AppCompatActivity{
+public class ProductDescriptionActivity extends AppCompatActivity {
     private TextView productName, productPrice;
     private ImageView productImage;
     private LinearLayout variationContainer;
-    private Button addToCart, sizeS, sizeM, sizeL;
-    private String name, price, color, imageUrl, size;
+    private Button addToCart;
+    private RadioGroup sizeGroup;
+    private RadioButton sizeS, sizeM, sizeL;
+    private String name, price, color_name, imageUrl, selectedSize;
     private Boolean isProductInCart = false;
-    private String selectedSize;
+    private int colorInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +53,20 @@ public class ProductDescriptionActivity extends AppCompatActivity{
         productName = findViewById(R.id.product_name);
         productPrice = findViewById(R.id.product_price);
         productImage = findViewById(R.id.product_image);
-        variationContainer = findViewById(R.id.variation_container);  // Contenedor para las variaciones
-        ImageButton likeBtn = findViewById(R.id.likeBtn);
+        variationContainer = findViewById(R.id.variation_container);
         addToCart = findViewById(R.id.addToCartBtn);
+        sizeGroup = findViewById(R.id.size_options);
         sizeS = findViewById(R.id.size_s);
         sizeM = findViewById(R.id.size_m);
         sizeL = findViewById(R.id.size_l);
-
+        ImageButton likeBtn = findViewById(R.id.likeBtn);
 
         // Recuperamos los datos del Intent
         Intent intent = getIntent();
         name = intent.getStringExtra("product_name");
         price = intent.getStringExtra("product_price");
         String image = intent.getStringExtra("product_image");
+        color_name = intent.getStringExtra("product_color");
 
         // Establecemos los valores de nombre y precio
         productName.setText(name);
@@ -68,12 +74,8 @@ public class ProductDescriptionActivity extends AppCompatActivity{
 
         // Verificamos si la URL de la imagen está presente
         if (image != null && !image.isEmpty()) {
-            // Cargar la imagen con Picasso
-            Picasso.get()
-                    .load(image)  // La URL de la imagen pasada desde el intent
-                    .into(productImage);  // Establece la imagen en el ImageView
+            Picasso.get().load(image).error(R.drawable.profile_icon).into(productImage);
         } else {
-            // Si no hay imagen, ponemos una imagen predeterminada
             productImage.setImageResource(R.drawable.profile_icon);
         }
 
@@ -81,88 +83,74 @@ public class ProductDescriptionActivity extends AppCompatActivity{
         getColours(name);
 
         // Botón para agregar el producto al carrito
-        addToCart.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                if (!isProductInCart){
-                    addToCart();
-                   // addToCartToSingleton(name, price, color, imageUrl);  // Usamos el Singleton para añadir el producto
-                    isProductInCart = true;
+        addToCart.setOnClickListener(view -> {
+            if (!isProductInCart) {
+                if (selectedSize == null || selectedSize.isEmpty()) {
+                    Toast.makeText(ProductDescriptionActivity.this, "Por favor seleccione una talla.", Toast.LENGTH_LONG).show();
+                } else if (color_name == null || color_name.isEmpty()) {
+                    Toast.makeText(ProductDescriptionActivity.this, "Por favor seleccione un color.", Toast.LENGTH_LONG).show();
                 } else {
-
-                  //  removeFromCart();  // Aquí implementaremos la lógica para eliminar del carrito si es necesario
-                    isProductInCart = false;
+                    addToCart();
+                    isProductInCart = true;
+                    addToCart.setText("Eliminar del carrito");
                 }
+            } else {
+                // Lógica para eliminar del carrito
+                isProductInCart = false;
+                addToCart.setText("Añadir al carrito");
             }
         });
 
-        // Botón de "Atrás" para regresar a la actividad anterior
+        // Botón de "Atrás"
         Button backButton = findViewById(R.id.backBtn);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProductDescriptionActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
-        sizeS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedSize = "S";  // Set the selected size to "S"
-                Log.d("Size", "Selected Size: " + selectedSize);
-            }
+        backButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(ProductDescriptionActivity.this, HomeActivity.class);
+            startActivity(intent1);
         });
 
-        sizeM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedSize = "M";  // Set the selected size to "M"
-                Log.d("Size", "Selected Size: " + selectedSize);
+        // Listener para tamaño seleccionado
+        sizeGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.size_s) {
+                selectedSize = "S";
+            } else if (checkedId == R.id.size_m) {
+                selectedSize = "M";
+            } else if (checkedId == R.id.size_l) {
+                selectedSize = "L";
             }
         });
-
-        sizeL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedSize = "L";  // Set the selected size to "L"
-                Log.d("Size", "Selected Size: " + selectedSize);
-            }
-        });
-
     }
-
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
     private void getColours(String productName) {
         String url = "http://10.0.2.2/4PARTY/getVariations.php?product_name=" + Uri.encode(productName);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("API Response", response);
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            if (jsonResponse.has("product")) {
-                                JSONObject product = jsonResponse.getJSONObject("product");
-                                name = product.getString("name");
-                                price = product.getString("price");
-                                imageUrl = product.getString("image_url");
+                response -> {
+                    Log.d("API Response", response);
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        if (jsonResponse.has("product")) {
+                            JSONObject product = jsonResponse.getJSONObject("product");
+                            name = product.getString("name");
+                            price = product.getString("price");
+                            imageUrl = product.getString("image_url");
 
-                                // Establecer los datos del producto en la UI
-                                productPrice.setText(price);
-                                Picasso.get().load(imageUrl).into(productImage);
+                            // Establecer los datos del producto en la UI
+                            productPrice.setText(price);
+                            Picasso.get().load(imageUrl).into(productImage);
 
-                                // Procesar las variaciones si existen
-                                JSONArray variations = jsonResponse.getJSONArray("variations");
+                            // Procesar las variaciones si existen
+                            JSONArray variations = jsonResponse.getJSONArray("variations");
+                            if (variations.length() > 1) {
+                                // Si hay más de un color, mostrar las variaciones
                                 for (int i = 0; i < variations.length(); i++) {
                                     JSONObject variation = variations.getJSONObject(i);
                                     String color = variation.getString("color");
                                     String variationImage = variation.getString("image_url");
-                                    
-                                    int colorInt = getColor(color);
 
-                                    // Primero, carga la plantilla del botón
+                                    colorInt = getColor(color);
+
+                                    // Crear botón de color dinámicamente
                                     Button colorButton = new Button(ProductDescriptionActivity.this);
                                     colorButton.setBackgroundResource(R.drawable.button_template);  // Aplica la plantilla de fondo
 
@@ -170,39 +158,35 @@ public class ProductDescriptionActivity extends AppCompatActivity{
                                     GradientDrawable drawable = (GradientDrawable) colorButton.getBackground();
                                     drawable.setColor(colorInt);  // Cambiar el color del fondo usando colorInt (el color dinámico)
 
-                                    // Establecer un tamaño específico para los botones
+                                    // Configuración de layout del botón
                                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                            LinearLayout.LayoutParams.WRAP_CONTENT,  // Ancho
-                                            LinearLayout.LayoutParams.WRAP_CONTENT   // Alto
+                                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
                                     );
                                     params.setMargins(10, 10, 10, 10);  // Márgenes
                                     colorButton.setLayoutParams(params);
 
                                     // Establecer un listener para cambiar la imagen cuando se seleccione una variación
-                                    colorButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Picasso.get().load(variationImage).into(productImage);
-                                        }
+                                    colorButton.setOnClickListener(view -> {
+                                        color_name = color;
+                                        Picasso.get().load(variationImage).into(productImage);
                                     });
 
                                     // Añadir el botón al contenedor de variaciones
                                     variationContainer.addView(colorButton);
                                 }
                             } else {
-                                Log.e("Product", "No se encontraron productos");
+                                // Si solo hay un color, ocultar el contenedor de variaciones
+                                variationContainer.setVisibility(View.GONE);
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } else {
+                            Log.e("Product", "No se encontraron productos");
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Error", error.toString());
-                    }
-                });
+                error -> Log.e("Error", error.toString()));
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
@@ -231,61 +215,37 @@ public class ProductDescriptionActivity extends AppCompatActivity{
         }
     }
 
-    // Método para añadir el producto al carrito utilizando el Singleton
-    /*public void addToCartToSingleton(String name, String price, String color, String imageUrl) {
-        Cart cartProduct = new Cart(name, 1, selectedSize, price, color, imageUrl);
-        CartSingleton.getInstance().addProductToCart(cartProduct);  // Usamos el Singleton para añadir al carrito
-    }
-
-    // Método para eliminar el producto del carrito
-    public void removeFromCart() {
-        Cart cartProduct = new Cart(name, 1, "M", price, color, imageUrl);
-        CartSingleton.getInstance().removeProductFromCart(cartProduct);  // Eliminar producto usando Singleton
-    }*/
-
-
-    public void addToCart(){
+    public void addToCart() {
         // URL del archivo PHP que maneja la solicitud
         String url = "http://10.0.2.2/4PARTY/addToCart.php";
 
         // Crear la solicitud POST con StringRequest
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("API Response", response); // Imprime la respuesta para depuración
-                        try {
-                            // Procesar la respuesta JSON del servidor
-                            JSONObject jsonResponse = new JSONObject(response);
-                            String status = jsonResponse.getString("status");
-                            String message = jsonResponse.getString("message");
+                response -> {
+                    Log.d("API Response", response);  // Imprime la respuesta para depuración
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        String status = jsonResponse.getString("status");
+                        String message = jsonResponse.getString("message");
 
-                            if (status.equals("success")) {
-                                Log.d("AddToCart", "Product added: " + message);
-                                // Aquí puedes actualizar la UI, como cambiar el texto del botón
-                                addToCart.setText("Eliminar del carrito");
-                            } else {
-                                Log.e("AddToCart", "Error: " + message);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if ("success".equals(status)) {
+                            Log.d("AddToCart", "Product added: " + message);
+                            addToCart.setText("Eliminar del carrito");
+                        } else {
+                            Log.e("AddToCart", "Error: " + message);
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Manejo de errores
-                        Log.e("AddToCart", "Request failed: " + error.toString());
-                    }
-                }) {
+                error -> Log.e("AddToCart", "Request failed: " + error.toString())) {
 
             @Override
             protected java.util.Map<String, String> getParams() {
                 // Crear los parámetros que se enviarán al servidor
                 java.util.Map<String, String> params = new java.util.HashMap<>();
                 params.put("product_name", name);
-                params.put("color_id", "3");
+                params.put("color_id", color_name);
                 params.put("size", selectedSize);
                 return params;
             }
@@ -296,6 +256,4 @@ public class ProductDescriptionActivity extends AppCompatActivity{
         // Añadir la solicitud a la cola
         queue.add(stringRequest);
     }
-
 }
-

@@ -60,7 +60,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             Intent intent = new Intent(context, ProductDescriptionActivity.class);
             intent.putExtra("product_name", product.getName());
             intent.putExtra("product_price", product.getPrice());
-            intent.putExtra("product_image", imageUrl); // Usamos la URL estática aquí
+            intent.putExtra("product_image", imageUrl);
+            intent.putExtra("product_color", product.getColor());// Usamos la URL estática aquí
             context.startActivity(intent);
         });
     }

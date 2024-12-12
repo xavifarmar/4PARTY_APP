@@ -6,8 +6,6 @@
     android:layout_height="match_parent">
 
     <!-- Título del producto -->
-
-    <!-- Botón de retroceso -->
     <TextView
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
@@ -20,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Botón de retroceso -->
     <Button
         android:id="@+id/backBtn"
         android:layout_width="91dp"
@@ -76,8 +75,7 @@
             app:srcCompat="@drawable/heart_icon" />
     </LinearLayout>
 
-    <!-- Sección de Tallas -->
-
+    <!-- Sección de Tallas con RadioGroup -->
     <TextView
         android:id="@+id/size_section"
         android:layout_width="wrap_content"
@@ -92,37 +90,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/price_layout" />
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/size_options"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/size_section"
+        android:layout_marginTop="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <!-- Botones de tallas -->
-        <Button
+        <!-- Botones de tallas como RadioButtons -->
+        <RadioButton
             android:id="@+id/size_s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="S"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            android:layout_marginEnd="8dp" />
+
+        <RadioButton
             android:id="@+id/size_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="M"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            android:layout_marginEnd="8dp" />
+
+        <RadioButton
             android:id="@+id/size_l"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="L"/>
-    </LinearLayout>
+            android:text="L" />
+    </RadioGroup>
 
     <!-- Sección de Colores -->
     <TextView
@@ -138,8 +138,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"/>
 
-    <!-- Botón Añadir a la cesta -->
-
+    <!-- Contenedor de botones de variaciones -->
     <LinearLayout
         android:id="@+id/variation_container"
         android:layout_width="wrap_content"
@@ -149,8 +148,9 @@
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_section" />
+        app:layout_constraintTop_toBottomOf="@id/color_section" />
 
+    <!-- Botón Añadir a la cesta -->
     <Button
         android:id="@+id/addToCartBtn"
         android:layout_width="0dp"
@@ -164,8 +164,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/variation_container"
+        app:layout_constraintTop_toBottomOf="@id/variation_container"
         app:layout_constraintVertical_bias="0.773" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

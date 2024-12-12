@@ -6,13 +6,15 @@ public class Product {
     private String price;
     private String image;
     private String is_primary;
+    private String color;
 
 
     // Constructor
-    public Product(String name, String price, String images) {
+    public Product(String name, String price, String images, String color) {
         this.name = name;
         this.price = price;
         this.image = images;
+        this.color = color;
     }
 
     // Getters y Setters
@@ -38,5 +40,13 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

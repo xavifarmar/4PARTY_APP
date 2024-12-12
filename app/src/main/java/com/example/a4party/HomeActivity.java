@@ -137,9 +137,10 @@ public class HomeActivity extends AppCompatActivity {
                                 String name = productObject.getString("name");
                                 String price = productObject.getString("price");
                                 String image = productObject.getString("image_url");
+                                String color = productObject.getString("color_id");
 
                                 // Crear un objeto Product y agregarlo a la lista
-                                Product product = new Product(name, price, image);
+                                Product product = new Product(name, price, image, color);
                                 productList.add(product);
                             }
 
