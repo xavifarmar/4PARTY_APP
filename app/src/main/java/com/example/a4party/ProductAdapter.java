@@ -75,6 +75,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         TextView productName, productPrice;
         ImageView productImage;
+        ImageButton productLike;
+        boolean isRed = false;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +84,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productName = itemView.findViewById(R.id.product_title);
             productPrice = itemView.findViewById(R.id.price_product);
             productImage = itemView.findViewById(R.id.image_product);
+            productLike = itemView.findViewById(R.id.like_button);
+            productLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isRed){
+                        productLike.setImageResource(R.drawable.heart_regular);
+                    } else {
+                        productLike.setImageResource(R.drawable.heart_solid_red);
+                    }
+                    isRed = !isRed;
+                }
+            });
+
         }
     }
 

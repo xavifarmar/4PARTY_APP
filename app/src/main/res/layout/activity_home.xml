@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- RecyclerView para mostrar la lista de productos -->
-
-    <!-- Barra de Navegación Inferior -->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -39,11 +35,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/border_selector"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="home_button"
-            app:srcCompat="@drawable/home_icon"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/house_solid"
+            app:tint="@color/white"
+
+             />
 
         <ImageButton
             android:id="@+id/search_btn"
@@ -52,8 +49,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="search button"
-            app:srcCompat="@drawable/search_icon"
-            android:background="@drawable/border_selector"
+            app:srcCompat="@drawable/magnifying_glass_solid"
             app:tint="@color/white" />
 
         <ImageButton
@@ -61,10 +57,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/border_selector"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="cart_button"
-            app:srcCompat="@drawable/cart_icon"
+            app:srcCompat="@drawable/cart_shopping_solid"
             app:tint="@color/white" />
 
         <ImageButton
@@ -74,8 +69,8 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="heart_button"
-            app:srcCompat="@drawable/heart_icon"
-            android:background="@drawable/border_selector"
+            app:srcCompat="@drawable/heart_solid"
+
             app:tint="@color/white" />
 
         <ImageButton
@@ -85,18 +80,19 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="profile_button"
-            android:background="@drawable/border_selector"
-            app:srcCompat="@drawable/profile_icon"
+            app:srcCompat="@drawable/user_solid"
             app:tint="@color/white" />
     </LinearLayout>
 
     <!-- Bloque para el logo con fondo -->
+
     <LinearLayout
         android:id="@+id/logo_block"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/white_grey"
         android:gravity="center"
+        android:elevation="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
