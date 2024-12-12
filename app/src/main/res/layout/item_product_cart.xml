@@ -26,7 +26,7 @@
             android:layout_marginEnd="16dp"
             android:contentDescription="Product Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/profile_icon" />
+            android:src="@drawable/icon_heart_regular" />
 
         <!-- Detalles del producto -->
         <LinearLayout

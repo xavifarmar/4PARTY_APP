@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Añadir a favoritos"
-            app:srcCompat="@drawable/heart_regular"
+            app:srcCompat="@drawable/icon_heart_regular"
             android:backgroundTint="@android:color/transparent"/>
     </LinearLayout>
 

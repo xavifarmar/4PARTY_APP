@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:contentDescription="Like Button"
-                app:srcCompat="@drawable/heart_regular"
+                app:srcCompat="@drawable/icon_heart_regular"
                 app:tint="@android:color/black" />
         </LinearLayout>
 

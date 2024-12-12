@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="home_button"
-            app:srcCompat="@drawable/house_solid"
+            app:srcCompat="@drawable/icon_house_solid"
             app:tint="@color/white"
 
              />
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="search button"
-            app:srcCompat="@drawable/magnifying_glass_solid"
+            app:srcCompat="@drawable/icon_search_solid"
             app:tint="@color/white" />
 
         <ImageButton
@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="cart_button"
-            app:srcCompat="@drawable/cart_shopping_solid"
+            app:srcCompat="@drawable/icon_cart_solid"
             app:tint="@color/white" />
 
         <ImageButton
@@ -69,7 +69,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="heart_button"
-            app:srcCompat="@drawable/heart_solid"
+            app:srcCompat="@drawable/icon_heart_solid"
 
             app:tint="@color/white" />
 
@@ -80,7 +80,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="profile_button"
-            app:srcCompat="@drawable/user_solid"
+            app:srcCompat="@drawable/icon_user_solid"
             app:tint="@color/white" />
     </LinearLayout>
 

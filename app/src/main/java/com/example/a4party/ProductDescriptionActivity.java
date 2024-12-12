@@ -74,9 +74,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
         // Verificamos si la URL de la imagen está presente
         if (image != null && !image.isEmpty()) {
-            Picasso.get().load(image).error(R.drawable.profile_icon).into(productImage);
+            Picasso.get().load(image).error(R.drawable.icon_user_solid).into(productImage);
         } else {
-            productImage.setImageResource(R.drawable.profile_icon);
+            productImage.setImageResource(R.drawable.icon_user_solid);
         }
 
         // Llamamos al método para obtener los colores y variaciones

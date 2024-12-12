@@ -53,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Picasso.get().load(imageUrl).into(holder.productImage);
         } else {
-            holder.productImage.setImageResource(R.drawable.profile_icon); // Imagen por defecto
+            holder.productImage.setImageResource(R.drawable.icon_user_solid); // Imagen por defecto
         }
         holder.quantity.setText(String.valueOf(cart.getQuantity()));
 

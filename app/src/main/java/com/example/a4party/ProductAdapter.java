@@ -5,20 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;  // Importa Picasso
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -52,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Picasso.get().load(imageUrl).into(holder.productImage);
         } else {
-            holder.productImage.setImageResource(R.drawable.profile_icon); // Imagen por defecto
+            holder.productImage.setImageResource(R.drawable.icon_user_solid); // Imagen por defecto
         }
 
         holder.itemView.setOnClickListener(v -> {
@@ -89,9 +83,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 @Override
                 public void onClick(View view) {
                     if (isRed){
-                        productLike.setImageResource(R.drawable.heart_regular);
+                        productLike.setImageResource(R.drawable.icon_heart_regular);
                     } else {
-                        productLike.setImageResource(R.drawable.heart_solid_red);
+                        productLike.setImageResource(R.drawable.icon_heart_solid_red);
                     }
                     isRed = !isRed;
                 }
