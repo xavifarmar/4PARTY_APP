@@ -45,7 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         // Asignar los datos del producto al viewHolder
         holder.productName.setText(cart.getProduct_name());
-        holder.price.setText(cart.getPrice());
+        holder.price.setText(cart.getPrice() + "€");
         holder.color.setText(cart.getColor());
         holder.size.setText(cart.getSize());
         String imageUrl = cart.getImage_url();

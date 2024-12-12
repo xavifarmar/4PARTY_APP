@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".CartActivity">
 
-    <!-- Contenedor de producto (imagen y detalles) -->
+    <!-- Contenedor principal para la imagen y detalles -->
     <LinearLayout
+        android:layout_width="394dp"
+        android:layout_height="148dp"
         android:orientation="horizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingEnd="8dp"
+        android:weightSum="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:weightSum="1">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Imagen del producto -->
         <ImageView
@@ -22,24 +24,27 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/profile_icon"
-            android:scaleType="centerCrop" />
+            android:contentDescription="Product Image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_icon" />
 
-        <!-- Detalles del producto (nombre, color, tamaño, precio) -->
+        <!-- Detalles del producto -->
         <LinearLayout
-            android:layout_width="47dp"
+            android:layout_width="57dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:orientation="vertical">
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:paddingStart="8dp">
 
             <TextView
                 android:id="@+id/productNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Product Name"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -47,8 +52,9 @@
                 android:id="@+id/ProductColorTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:text="Color: Red"
+                android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 
             <TextView
@@ -57,55 +63,66 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Size: M"
+                android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 
-            <!-- Precio del producto -->
+            <!-- Precio -->
             <TextView
                 android:id="@+id/ProductPriceTxt"
-                android:layout_width="49dp"
-                android:layout_height="51dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="53dp"
+                android:layout_height="wrap_content"
                 android:text="Price: $50.00"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Contenedor de cantidad -->
+        <!-- Contenedor de botones de cantidad -->
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="16dp">
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent">
 
+            <!-- Botón de incremento -->
             <Button
                 android:id="@+id/btnIncrease"
-                android:layout_width="65dp"
-                android:layout_height="match_parent"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/button_template"
+                android:background="@drawable/rounded_red_background"
                 android:text="+"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
+            <!-- Texto para la cantidad -->
             <TextView
                 android:id="@+id/ProductQuantityTxt"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:gravity="center"
                 android:text="1"
-                android:textSize="16sp"
-                android:layout_marginEnd="8dp" />
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
+            <!-- Botón de decremento -->
             <Button
                 android:id="@+id/btnDecrease"
-                android:layout_width="65dp"
-                android:layout_height="match_parent"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_red_background"
+                android:padding="12dp"
                 android:text="-"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:background="@drawable/button_template" />
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
 
