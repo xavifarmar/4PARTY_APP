@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenedor para los botones de navegación -->
+    <LinearLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/red"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icon_house_solid"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/white"
+            android:contentDescription="home_button"/>
+
+        <ImageButton
+            android:id="@+id/search_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="search button"
+            app:srcCompat="@drawable/icon_search_solid"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/cart_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="cart_button"
+            app:srcCompat="@drawable/icon_cart_solid"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/heart_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="heart_button"
+            app:srcCompat="@drawable/icon_heart_solid"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/profile_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="profile_button"
+            app:srcCompat="@drawable/icon_user_solid"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- Contenedor para los botones con texto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botones con los textos solicitados -->
+        <Button
+            android:id="@+id/pedidosBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pedidos"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/devolucionesBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Devoluciones"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/misDatosBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mis Datos"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/ajustesBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajustes de la App"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/acercaDeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Acerca de"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            android:id="@+id/contactoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contacto"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+
+        <!-- Botón de cerrar sesión con fondo distinto -->
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar Sesión"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

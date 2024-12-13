@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_configuration);
+        setContentView(R.layout.activity_profile);
 
         // Referencia a los botones
         ImageButton likes_btn = findViewById(R.id.heart_btn);

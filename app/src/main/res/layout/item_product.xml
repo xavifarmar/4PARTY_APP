@@ -45,7 +45,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Producto muy largo que debería truncarse"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="$100"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text"
             android:textSize="20sp"
             android:textStyle="bold" />
 
