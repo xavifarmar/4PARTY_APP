@@ -8,21 +8,21 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="636dp"
+        android:layout_width="411dp"
+        android:layout_height="666dp"
         android:layout_marginTop="16dp"
         android:background="@color/background"
         app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintVertical_bias="0.961" />
 
     <LinearLayout
         android:id="@+id/navigation_bar"
-        android:layout_width="409dp"
-        android:layout_height="67dp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
         android:background="@color/nav_bar"
         android:gravity="center"
         android:orientation="horizontal"
@@ -107,6 +107,7 @@
             android:layout_width="157dp"
             android:layout_height="55dp"
             android:backgroundTint="@color/red"
+            app:tint="@color/red"
             app:srcCompat="@drawable/logo_icon_small" />
     </LinearLayout>
 
@@ -115,7 +116,7 @@
         android:layout_width="224dp"
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="sans-serif"
         android:text="Productos"
         android:textColor="@color/text"
