@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -34,6 +37,7 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         viewCart();
+        getTotalPriceCart();
 
         // Inicializamos el RecyclerView
         recyclerView = findViewById(R.id.cartRecyclerView);
@@ -87,7 +91,7 @@ public class CartActivity extends AppCompatActivity {
     }
     public void viewCart(){
 
-        String url = "http://10.0.2.2/4PARTY/viewCart.php" ;
+        String url = "http://10.0.2.2/4PARTY/viewCart.php?getCartItems=true" ;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -152,4 +156,34 @@ public class CartActivity extends AppCompatActivity {
         CartAdapter cartAdapter = new CartAdapter(cartList);
         recyclerView.setAdapter(cartAdapter);
     }
+
+    public void getTotalPriceCart(){
+        String url = "http://10.0.2.2/4PARTY/viewCart.php?getTotalPriceCart=true";
+        TextView totalPriceTxt;
+        totalPriceTxt = findViewById(R.id.totalPrice);
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+
+                    String totalPrice = jsonResponse.getString("total_price");
+
+                    totalPriceTxt.setText(totalPrice + "€");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Error", "Error in request: " + error.toString());
+                }
+            });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+        }
 }
+

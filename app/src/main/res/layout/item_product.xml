@@ -57,7 +57,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="Like Button"
                 app:srcCompat="@drawable/icon_heart_regular"
-                app:tint="@android:color/black" />
+                 />
         </LinearLayout>
 
         <!-- Contenedor de Precio -->
