@@ -83,7 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 @Override
                 public void onClick(View view) {
                     if (isRed){
-                        productLike.setImageResource(R.drawable.icon_heart_regular);
+                        productLike.setImageResource(R.drawable.icon_heart_solid);
                     } else {
                         productLike.setImageResource(R.drawable.icon_heart_solid_red);
                     }
