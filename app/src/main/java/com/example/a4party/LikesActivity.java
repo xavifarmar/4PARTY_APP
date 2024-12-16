@@ -1,14 +1,14 @@
 package com.example.a4party;
 
 import android.content.Intent;
-import android.media.MediaSync;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,70 +24,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LikesActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private LikesAdapter likesAdapter;
+    private List<Likes> likesList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_likes);
+
+        // Inicializamos la lista
+        likesList = new ArrayList<>();
+        recyclerView = findViewById(R.id.likesRecyclerView);
+
+        // Configuramos RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Configuramos el adaptador
+        likesAdapter = new LikesAdapter(likesList);
+        recyclerView.setAdapter(likesAdapter);
+
+        // Llamamos al método para obtener los likes
         viewLikes();
 
-        // Referencia a los botones
+        // Referencias a los botones
         ImageButton profile_btn = findViewById(R.id.profile_btn);
         ImageButton cart_btn = findViewById(R.id.cart_btn);
         ImageButton home_btn = findViewById(R.id.home_btn);
         ImageButton search_btn = findViewById(R.id.search_btn);
 
-        home_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Cambiar a la actividad LikesActivity
-                Intent intent = new Intent(LikesActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Configurar el OnClickListener para el botón likes_btn
-        profile_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Cambiar a la actividad LikesActivity
-                Intent intent = new Intent(LikesActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        cart_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Cambiar a la actividad
-                Intent intent = new Intent(LikesActivity.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        search_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Cambiar a la actividad
-                Intent intent = new Intent(LikesActivity.this, SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
+        home_btn.setOnClickListener(v -> startActivity(new Intent(LikesActivity.this, HomeActivity.class)));
+        profile_btn.setOnClickListener(v -> startActivity(new Intent(LikesActivity.this, ProfileActivity.class)));
+        cart_btn.setOnClickListener(v -> startActivity(new Intent(LikesActivity.this, CartActivity.class)));
+        search_btn.setOnClickListener(v -> startActivity(new Intent(LikesActivity.this, SearchActivity.class)));
     }
-    public void viewLikes(){
-        String url = "http://10.0.2.2/4PARTY/likes.php?getLikes";
 
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+    // Método para obtener los likes desde el servidor
+    public void viewLikes() {
+        String url = "http://10.0.2.2/4PARTY/likes.php?user_id=3";
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Response", response);
+                Log.d("Soy el puto problema", response);
+
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray likesItems = jsonResponse.getJSONArray("likes_items");
 
-                    List<Likes> likesList = new ArrayList<>();
+                    // Limpiamos la lista antes de agregar los nuevos elementos
+                    likesList.clear();
 
                     for (int i = 0; i < likesItems.length(); i++) {
                         JSONObject likesItem = likesItems.getJSONObject(i);
@@ -96,27 +83,32 @@ public class LikesActivity extends AppCompatActivity {
                         String image_url = likesItem.getString("image_url");
                         Boolean liked = true;
 
+                        // Agregamos el nuevo producto a la lista
                         Likes likedProduct = new Likes(name, image_url, liked);
                         likesList.add(likedProduct);
                     }
 
-                    // Llamamos a una función para actualizar el RecyclerView con los datos
-                    //updateCartRecyclerView(cartList);
+                    // Actualizamos el RecyclerView con la lista
+                    updateLikesRecyclerView();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        },
-            new Response.ErrorListener(){
-                @Override
-               public void onErrorResponse(VolleyError error){
-                    Log.e("Error", "Error in request: " + error.toString());
-                }
-            });
-            RequestQueue queue = Volley.newRequestQueue(this);
-            queue.add(request);
-        }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Error", "Error in request: " + error.toString());
+            }
+        });
 
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+    }
+
+    // Método para actualizar el RecyclerView con los nuevos datos
+    public void updateLikesRecyclerView() {
+        // Notificamos al adaptador que la lista ha cambiado
+        likesAdapter.notifyDataSetChanged();
+    }
 }
-

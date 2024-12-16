@@ -29,7 +29,7 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikeViewHold
 
 
     @Override
-    public void onBindViewHolder(LikesAdapter.LikeViewHolder holder, int position) {
+    public void onBindViewHolder(LikeViewHolder holder, int position) {
         Likes like = likesList.get(position);
 
         holder.product_name.setText(like.getProduct_name());
@@ -52,6 +52,7 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikeViewHold
     TextView product_name;
     ImageView product_image;
     ImageButton like_btn;
+
     public LikeViewHolder(View itemView) {
         super(itemView);
 

@@ -93,10 +93,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     // Cambiar imagen del botón de like
                     if (isRed) {
                         productLike.setImageResource(R.drawable.icon_heart_regular); // Corazón vacío
-                        removeLike(product); // Eliminar like de la base de datos
+                        //removeLike(product); // Eliminar like de la base de datos
                     } else {
                         productLike.setImageResource(R.drawable.icon_heart_solid); // Corazón relleno
-                        addLike(product); // Añadir like a la base de datos
+                        //addLike(product); // Añadir like a la base de datos
                     }
                     isRed = !isRed; // Alternar el estado del like
                 }
