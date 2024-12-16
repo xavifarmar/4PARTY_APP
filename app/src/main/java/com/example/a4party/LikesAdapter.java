@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikeViewHolder>{
@@ -29,6 +31,15 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikeViewHold
     @Override
     public void onBindViewHolder(LikesAdapter.LikeViewHolder holder, int position) {
         Likes like = likesList.get(position);
+
+        holder.product_name.setText(like.getProduct_name());
+        String image_url = like.getImage_url();
+
+        if (image_url != null && !image_url.isEmpty()){
+            Picasso.get().load(image_url).into(holder.product_image);
+        }else{
+            holder.product_image.setImageResource(R.drawable.icon_heart_regular);
+        }
     }
 
     @Override

@@ -7,6 +7,7 @@ public class Product {
     private String image;
     private String is_primary;
     private String color;
+    private boolean liked;
 
 
     // Constructor
