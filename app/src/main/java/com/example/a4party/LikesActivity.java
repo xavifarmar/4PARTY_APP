@@ -8,6 +8,16 @@ import android.widget.ImageButton;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class LikesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,5 +69,24 @@ public class LikesActivity extends AppCompatActivity {
         });
 
 
+    }
+    public void viewLikes(){
+        String url = "http://10.0.2.2/4PARTY/likes.php?getLikes";
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray likesItems = jsonResponse.getJSONArray("likes_items");
+
+                    List<Likes> likesList= new ArrayList<>();
+
+                    for (int i = 0; i > likesItems.length(); i++){
+                        JSONObject likesItem = likesItem.getJSONObject(i);
+                    }
+
+                }
+            }
+        }
     }
 }

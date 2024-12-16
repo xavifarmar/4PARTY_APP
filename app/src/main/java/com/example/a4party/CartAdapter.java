@@ -5,11 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -92,7 +90,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         public CartViewHolder(View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.productImage);
+            productImage = itemView.findViewById(R.id.product_image);
             productName = itemView.findViewById(R.id.productNameTxt);
             quantity = itemView.findViewById(R.id.ProductQuantityTxt);
             size = itemView.findViewById(R.id.ProductSizeTxt);

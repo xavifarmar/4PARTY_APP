@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="heart_button"
-            app:srcCompat="@drawable/icon_heart_solid"
+            app:srcCompat="@drawable/icon_heart_regular"
 
             app:tint="@color/red" />
 
