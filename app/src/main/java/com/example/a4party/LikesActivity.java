@@ -62,7 +62,7 @@ public class LikesActivity extends AppCompatActivity {
 
     // Método para obtener los likes desde el servidor
     public void viewLikes() {
-        String url = "http://10.0.2.2/4PARTY/likes.php?user_id=3";
+        String url = "http://10.0.2.2/4PARTY/likes.php?getLikes=true";
 
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

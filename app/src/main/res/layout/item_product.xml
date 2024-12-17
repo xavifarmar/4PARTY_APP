@@ -7,9 +7,9 @@
 
     <!-- Contenedor principal del Producto con borde y sombra -->
     <LinearLayout
-        android:layout_width="212dp"
-        android:layout_height="322dp"
-        android:layout_marginLeft="4dp"
+        android:layout_width="188dp"
+        android:layout_height="320dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/product_border"
         android:elevation="6dp"

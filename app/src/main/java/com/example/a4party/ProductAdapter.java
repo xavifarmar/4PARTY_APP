@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,11 +48,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(product.getName());
         holder.productPrice.setText("€" + product.getPrice());
         String imageUrl = product.getImage();
+        int liked = product.getLiked();  // Aquí obtenemos el estado de "liked" de la clase Product
 
+        // Si el producto tiene una URL de imagen, la cargamos con Picasso
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Picasso.get().load(imageUrl).into(holder.productImage);
         } else {
             holder.productImage.setImageResource(R.drawable.icon_user_solid); // Imagen por defecto
+        }
+
+        // Establecer la imagen del botón de like según el estado
+        if (liked == 1) {
+            holder.productLike.setImageResource(R.drawable.icon_heart_solid);  // Corazón lleno (liked)
+        } else {
+            holder.productLike.setImageResource(R.drawable.icon_heart_regular);  // Corazón vacío (no liked)
         }
 
         // Pasar la información del producto a la actividad ProductDescriptionActivity
@@ -75,7 +85,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         TextView productName, productPrice;
         ImageView productImage;
         ImageButton productLike;
-        boolean isRed = false;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -85,20 +94,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productImage = itemView.findViewById(R.id.image_product);
             productLike = itemView.findViewById(R.id.like_button);
 
+            // Cuando el botón de like es presionado
             productLike.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     Product product = productList.get(position);  // Obtener el producto en la posición correcta
 
-                    // Cambiar imagen del botón de like
-                    if (isRed) {
-                        productLike.setImageResource(R.drawable.icon_heart_regular); // Corazón vacío
-                        //removeLike(product); // Eliminar like de la base de datos
+                    // Cambiar imagen del botón de like dependiendo del estado actual
+                    if (product.getLiked() == 1) {
+                        // Si ya está "liked", eliminamos el like
+                        product.setLiked(0);  // Cambiamos el estado a no "liked"
+                        productLike.setImageResource(R.drawable.icon_heart_regular);  // Corazón vacío
+                        removeLike(product);  // Llamamos a la función para quitar el like del servidor
                     } else {
-                        productLike.setImageResource(R.drawable.icon_heart_solid); // Corazón relleno
-                        //addLike(product); // Añadir like a la base de datos
+                        // Si no está "liked", agregamos el like
+                        product.setLiked(1);  // Cambiamos el estado a "liked"
+                        productLike.setImageResource(R.drawable.icon_heart_solid);  // Corazón lleno
+                        addLike(product);
                     }
-                    isRed = !isRed; // Alternar el estado del like
                 }
             });
         }
@@ -122,7 +135,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("product_name", String.valueOf(product.getName())); // Pasamos el ID del producto
+                    params.put("product_name", product.getName());  // Pasamos el nombre del producto
                     return params;
                 }
             };
@@ -133,7 +146,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         // Método para eliminar el like de la base de datos
         private void removeLike(Product product) {
-            String url = "http://10.0.2.2/4PARTY/likes.php?removeLike";
+            String url = "http://10.0.2.2/4PARTY/likes.php?removeLike=true";
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -150,7 +163,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("product_name", String.valueOf(product.getName())); // Pasamos el ID del producto
+                    params.put("product_name", product.getName());  // Pasamos el nombre del producto
                     return params;
                 }
             };

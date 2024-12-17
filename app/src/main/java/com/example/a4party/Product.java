@@ -1,5 +1,4 @@
 package com.example.a4party;
-import java.util.List;
 
 public class Product {
     private String name;
@@ -7,15 +6,16 @@ public class Product {
     private String image;
     private String is_primary;
     private String color;
-    private boolean liked;
+    private int liked;
 
 
     // Constructor
-    public Product(String name, String price, String images, String color) {
+    public Product(String name, String price, String images, String color, int liked) {
         this.name = name;
         this.price = price;
         this.image = images;
         this.color = color;
+        this.liked = liked;
     }
 
     // Getters y Setters
@@ -49,5 +49,13 @@ public class Product {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public int getLiked() {
+        return liked;
+    }
+
+    public void setLiked(int liked) {
+        this.liked = liked;
     }
 }
