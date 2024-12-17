@@ -27,7 +27,6 @@
         android:layout_marginTop="16dp"
         android:text="Volver"
         android:src="@drawable/icon_back_solid"
-        android:background:"color/trabs"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
