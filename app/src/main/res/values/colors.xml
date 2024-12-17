@@ -10,7 +10,7 @@
 
     <color name="background">#ffffff</color>
     <color name="background_form">#ADFFFCFC</color>
-    <color name="nav_bar">#EFECEC</color>
+    <color name="nav_bar">#D9D9D9</color>
     <color name="text">#000000</color>
     <color name="border_products">#000000</color>
     <color name="button">#950909</color>
