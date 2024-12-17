@@ -4,26 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="408dp"
-        android:layout_height="646dp"
+        android:layout_width="416dp"
+        android:layout_height="529dp"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:background="@color/background"
-        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintVertical_bias="0.955" />
 
     <LinearLayout
         android:id="@+id/navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:background="#F4F2F2"
+        android:layout_width="404dp"
+        android:layout_height="59dp"
+        android:background="@color/nav_bar"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="6dp"
@@ -89,9 +89,9 @@
 
     <LinearLayout
         android:id="@+id/logo_block"
-        android:layout_width="426dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#F4F2F2"
+        android:background="@color/nav_bar"
         android:elevation="8dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -119,7 +119,7 @@
         android:fontFamily="sans-serif"
         android:text="Productos"
         android:textColor="@color/text"
-        android:textSize="30dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent" />

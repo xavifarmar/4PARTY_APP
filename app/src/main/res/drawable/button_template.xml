@@ -12,5 +12,5 @@
         android:height="20dp"/> <!-- Tamaño del botón -->
 
     <corners
-        android:radius="20dp"/> <!-- Radio para hacerlo circular -->
+        android:radius="60dp"/> <!-- Radio para hacerlo circular -->
 </shape>

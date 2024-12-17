@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <!-- Contenedor principal del Producto con borde redondeado -->
     <LinearLayout
-        android:layout_width="184dp"
-        android:layout_height="276dp"
+        android:layout_width="202dp"
+        android:layout_height="278dp"
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_border_item_product"
@@ -51,7 +50,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Producto"
-                android:textColor="@color/black"
+                android:textColor="@color/text"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -75,9 +74,8 @@
             android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="$100"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-             />
+            android:textColor="@color/text"
+            android:textSize="14sp" />
     </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

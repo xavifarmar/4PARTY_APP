@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Bloque para el logo con fondo -->
+
     <!-- Bloque para el logo con fondo -->
     <LinearLayout
         android:id="@+id/logo_block"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:background="@color/white_grey"
+        android:layout_height="50dp"
+        android:background="#F4F2F2"
+        android:elevation="8dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,75 +23,78 @@
         <!-- Logo en el centro del bloque -->
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="162dp"
-            android:layout_height="45dp"
+            android:layout_width="157dp"
+            android:layout_height="55dp"
             android:backgroundTint="@color/red"
-            app:tint="@color/red"
-            app:srcCompat="@drawable/logo_icon_small" />
+            app:srcCompat="@drawable/logo_icon_small"
+            app:tint="@color/red" />
     </LinearLayout>
 
     <!-- Barra de Navegación Inferior -->
     <LinearLayout
         android:id="@+id/navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:background="@color/red"
+        android:layout_width="404dp"
+        android:layout_height="59dp"
+        android:background="#F4F2F2"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="6dp"
+        android:weightSum="5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/home_btn"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/icon_house_solid"
             android:backgroundTint="@android:color/transparent"
-            app:tint="@color/white"
-            android:contentDescription="home_button"/>
+            android:contentDescription="home_button"
+            app:srcCompat="@drawable/icon_house_solid"
+            app:tint="@color/red"
+
+            />
 
         <ImageButton
             android:id="@+id/search_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
             android:contentDescription="search button"
             app:srcCompat="@drawable/icon_search_solid"
-            app:tint="@color/white" />
+            app:tint="@color/red" />
 
         <ImageButton
             android:id="@+id/cart_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
             android:contentDescription="cart_button"
             app:srcCompat="@drawable/icon_cart_solid"
-            app:tint="@color/white" />
+            app:tint="@color/red" />
 
         <ImageButton
             android:id="@+id/heart_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
             android:contentDescription="heart_button"
-            app:srcCompat="@drawable/icon_heart_solid"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/icon_heart_regular"
+            app:tint="@color/red" />
 
         <ImageButton
             android:id="@+id/profile_btn"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
             android:contentDescription="profile_button"
-            app:srcCompat="@drawable/icon_user_solid"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/user_regular"
+            app:tint="@color/red" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

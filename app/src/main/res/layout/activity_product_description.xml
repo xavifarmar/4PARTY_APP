@@ -5,24 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Título del producto -->
-    <TextView
-        android:id="@+id/product_name"
+    <!-- Botón de retroceso -->
+    <Button
+        android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
-        android:text="Producto"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Botón de retroceso -->
-    <ImageButton
-        android:id="@+id/backBtn"
-        android:layout_width="91dp"
-        android:layout_height="38dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Volver"
@@ -30,13 +17,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Título del producto -->
+
     <!-- Imagen del producto -->
+
+    <!-- Banda para el precio -->
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="Producto"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backBtn" />
+
     <ImageView
         android:id="@+id/product_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/product_name" />
 
-    <!-- Banda para el precio -->
     <LinearLayout
         android:id="@+id/price_layout"
         android:layout_width="0dp"
@@ -71,24 +74,23 @@
         <ImageButton
             android:id="@+id/likeBtn"
             android:layout_width="wrap_content"
+            android:layout_gravity=""
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="Añadir a favoritos"
             app:srcCompat="@drawable/icon_heart_solid" />
     </LinearLayout>
 
-    <!-- Sección de Tallas con RadioGroup -->
+    <!-- Sección de Tallas -->
     <TextView
         android:id="@+id/size_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:text="Tallas"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/price_layout" />
 
@@ -97,14 +99,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/size_section"
-        android:layout_marginTop="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <!-- Botones de tallas como RadioButtons -->
         <RadioButton
             android:id="@+id/size_s"
             android:layout_width="wrap_content"
@@ -132,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Colores"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,10 +147,10 @@
         android:id="@+id/variation_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/color_section" />
 
@@ -159,7 +161,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
         android:minHeight="50dp"
         android:text="Añadir a la cesta"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -167,6 +168,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/variation_container"
-        app:layout_constraintVertical_bias="0.773" />
-
+        app:layout_constraintVertical_bias="0.827" />
 </androidx.constraintlayout.widget.ConstraintLayout>
