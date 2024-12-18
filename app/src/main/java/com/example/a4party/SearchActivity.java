@@ -129,7 +129,7 @@ public class SearchActivity extends AppCompatActivity {
     private void getProductsFiltered() {
         String gender_id = "1";
         // URL de tu archivo PHP que devuelve los productos en formato JSON
-        String url = "http://10.0.2.2/4PARTY/searchFilters.php?searchGender=true"; // Cambia por la URL de tu servidor
+        String url = "http://10.0.2.2/4PARTY/searchFilters.php"; // Cambia por la URL de tu servidor
 
         Log.d("API Request", "Haciendo solicitud a: " + url); // Log para ver la URL
 
@@ -177,15 +177,7 @@ public class SearchActivity extends AppCompatActivity {
                         Toast.makeText(SearchActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
                     }
 
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("gender_id", gender_id);
-
-                return params;
-            }
-        };
+                });
 
         // Agregar la solicitud a la cola de Volley
         Volley.newRequestQueue(this).add(stringRequest);

@@ -14,7 +14,7 @@
         android:background="@drawable/rounded_border_item_product"
         android:orientation="vertical"
         android:paddingTop="8dp"
-        android:paddingHorizontal="2dp"
+        android:paddingHorizontal="8dp"
         android:paddingBottom="5dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="10dp">
