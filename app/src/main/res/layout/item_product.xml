@@ -25,7 +25,7 @@
         <!-- Contenedor de Título y Botón de Like -->
         <ImageView
             android:id="@+id/image_product"
-            android:layout_width="167dp"
+            android:layout_width="183dp"
             android:layout_height="184dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="12dp"
