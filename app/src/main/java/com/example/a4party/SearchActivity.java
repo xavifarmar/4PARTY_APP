@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -23,7 +24,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -56,9 +59,16 @@ public class SearchActivity extends AppCompatActivity {
         // Llamar a la función para obtener los productos
         getProductsFiltered();
 
+        //Referencia a los botones de filtros
+        Button man_btn = findViewById(R.id.button_hombre);
+        Button woman_btn = findViewById(R.id.button_mujer);
+        Button suit_btn = findViewById(R.id.button_trajes);
+        Button dress_btn = findViewById(R.id.button_vestidos);
 
 
-        // Referencia a los botones
+
+        // Referencia a los botones de navegación
+
         ImageButton likes_btn = findViewById(R.id.heart_btn);
         ImageButton cart_btn = findViewById(R.id.cart_btn);
         ImageButton home_btn = findViewById(R.id.home_btn);
@@ -100,13 +110,26 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        man_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String gender_id = "1";
+            }
+        });
+        woman_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String gender_id = "2";
+            }
+        });
     }
     // Método para obtener los productos de la base de datos
 
     private void getProductsFiltered() {
-
+        String gender_id = "1";
         // URL de tu archivo PHP que devuelve los productos en formato JSON
-        String url = "http://10.0.2.2/4PARTY/searchFilters.php"; // Cambia por la URL de tu servidor
+        String url = "http://10.0.2.2/4PARTY/searchFilters.php?searchGender=true"; // Cambia por la URL de tu servidor
 
         Log.d("API Request", "Haciendo solicitud a: " + url); // Log para ver la URL
 
@@ -153,7 +176,16 @@ public class SearchActivity extends AppCompatActivity {
                         Log.e("Volley Error", error.toString()); // Log para errores de Volley
                         Toast.makeText(SearchActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("gender_id", gender_id);
+
+                return params;
+            }
+        };
 
         // Agregar la solicitud a la cola de Volley
         Volley.newRequestQueue(this).add(stringRequest);
