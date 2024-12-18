@@ -18,12 +18,12 @@ import java.util.List;
 public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
     private Context context;
-    private List<Product> productList;
+    private List<Product> productSearchList;
 
     // Constructor del adaptador
-    public SearchAdapter(Context context, List<Product> productList) {
+    public SearchAdapter(Context context, List<Product> productSearchList) {
         this.context = context;
-        this.productList = productList;
+        this.productSearchList = productSearchList;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.SearchVie
 
     @Override
     public void onBindViewHolder(SearchAdapter.SearchViewHolder holder, int position) {
-        Product product = productList.get(position);
+        Product product = productSearchList.get(position);
 
         // Establece el nombre y precio del producto
         holder.productName.setText(product.getName());
@@ -69,7 +69,7 @@ public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.SearchVie
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return productSearchList.size();
     }
 
     public class SearchViewHolder extends RecyclerView.ViewHolder {

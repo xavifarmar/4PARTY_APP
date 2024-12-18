@@ -29,7 +29,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ProductAdapter searchAdapter;
-    private List<Product> productList;
+    private List<Product> productSearchList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +47,10 @@ public class SearchActivity extends AppCompatActivity {
 
 
         // Inicializar la lista de productos
-        productList = new ArrayList<>();
+        productSearchList = new ArrayList<>();
 
         // Configurar el adaptador y asignarlo al RecyclerView
-        searchAdapter = new ProductAdapter(this, productList);
+        searchAdapter = new ProductAdapter(this, productSearchList);
         recyclerView.setAdapter(searchAdapter);
 
         // Llamar a la función para obtener los productos
@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
     private void getProductsFiltered() {
 
         // URL de tu archivo PHP que devuelve los productos en formato JSON
-        String url = "http://10.0.2.2/4PARTY/getFilteredProducts.php?"; // Cambia por la URL de tu servidor
+        String url = "http://10.0.2.2/4PARTY/searchFilters.php"; // Cambia por la URL de tu servidor
 
         Log.d("API Request", "Haciendo solicitud a: " + url); // Log para ver la URL
 
@@ -123,7 +123,7 @@ public class SearchActivity extends AppCompatActivity {
                             Log.d("JSON Array Size", String.valueOf(jsonArray.length())); // Ver el tamaño del array
 
                             // Limpiar la lista de productos
-                            productList.clear();
+                            productSearchList.clear();
 
                             // Recorrer el JSON y agregar productos a la lista
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -136,7 +136,7 @@ public class SearchActivity extends AppCompatActivity {
 
                                 // Crear un objeto Product y agregarlo a la lista
                                 Product product = new Product(name, price, image, color, liked);
-                                productList.add(product);
+                                productSearchList.add(product);
                             }
 
                             // Notificar al adaptador que los datos han cambiado
