@@ -43,8 +43,6 @@ public class CartActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.cartRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Usamos el Singleton para obtener la lista del carrito
-        cartList = CartSingleton.getInstance().getCartList();
 
         // Configuramos el adaptador con la lista de productos
         cartAdapter = new CartAdapter(cartList);

@@ -67,7 +67,7 @@ public class LikesActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Soy el puto problema", response);
+                Log.d("API Response", response);
 
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
