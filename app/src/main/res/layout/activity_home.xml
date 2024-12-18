@@ -8,11 +8,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="416dp"
-        android:layout_height="529dp"
+        android:layout_width="408dp"
+        android:layout_height="622dp"
         android:layout_marginTop="16dp"
-        android:gravity="center"
         android:background="@color/background"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:id="@+id/navigation_bar"
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@color/nav_bar"
         android:gravity="center"
@@ -96,7 +96,7 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -123,5 +123,17 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_block"
+        app:srcCompat="@drawable/icon_search_solid_small"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

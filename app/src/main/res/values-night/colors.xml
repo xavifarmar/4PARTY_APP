@@ -8,8 +8,9 @@
 
 
 <color name="background">#121212</color>
-    <color name="background_form">#AD181717</color>
+<color name="background_form">#AD1D1C1C</color>
 <color name="nav_bar">#090909</color>
+<color name="logo_bar">#090909</color>
 <color name="text">#FFFFFFFF</color>
 <color name="border_products">#E7E7E7</color>
 <color name="button">#950909</color>
