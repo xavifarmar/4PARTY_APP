@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
+
     private Context context;
     private List<Product> productList;
 
@@ -28,7 +29,7 @@ public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.SearchVie
     @Override
     public SearchAdapter.SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false);
-        return new SearchAdapter.(view);
+        return new SearchViewHolder(view);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.SearchVie
         return productList.size();
     }
 
-    public class SearcViewHolder extends RecyclerView.ViewHolder {
+    public class SearchViewHolder extends RecyclerView.ViewHolder {
 
         TextView productName, productPrice;
         ImageView productImage;

@@ -140,10 +140,10 @@ public class SearchActivity extends AppCompatActivity {
                             }
 
                             // Notificar al adaptador que los datos han cambiado
-                            productAdapter.notifyDataSetChanged();
+                            searchAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(HomeActivity.this, "Error al cargar los productos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchActivity.this, "Error al cargar los productos", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -151,7 +151,7 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error", error.toString()); // Log para errores de Volley
-                        Toast.makeText(HomeActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
                     }
                 });
 
