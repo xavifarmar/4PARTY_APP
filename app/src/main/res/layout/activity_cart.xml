@@ -99,12 +99,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
-        android:layout_width="408dp"
-        android:layout_height="669dp"
+        android:layout_width="414dp"
+        android:layout_height="624dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
         app:layout_constraintTop_toBottomOf="@+id/logo_block"
-        app:layout_constraintVertical_bias="0.291"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.579"
+        tools:layout_editor_absoluteX="3dp" />
 
     <LinearLayout
 
@@ -134,5 +134,15 @@
             android:text="0"
             android:textSize="24sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/deleteAllCartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="Vaciar carrito"
+        app:layout_constraintBottom_toTopOf="@+id/cartRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

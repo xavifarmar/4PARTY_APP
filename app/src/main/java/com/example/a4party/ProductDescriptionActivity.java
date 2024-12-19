@@ -6,12 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +39,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
     private ImageView productImage;
     private LinearLayout variationContainer;
     private Button addToCart;
-    private RadioGroup sizeGroup;
-    private RadioButton sizeS, sizeM, sizeL;
+    private Spinner sizeSpinner, colorSpinner;
     private String name, price, color_name, imageUrl, selectedSize;
     private Boolean isProductInCart = false;
     private int colorInt;
@@ -55,10 +55,8 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         productImage = findViewById(R.id.product_image);
         variationContainer = findViewById(R.id.variation_container);
         addToCart = findViewById(R.id.addToCartBtn);
-        sizeGroup = findViewById(R.id.size_options);
-        sizeS = findViewById(R.id.size_s);
-        sizeM = findViewById(R.id.size_m);
-        sizeL = findViewById(R.id.size_l);
+        sizeSpinner = findViewById(R.id.size_spinner);
+        colorSpinner = findViewById(R.id.color_spinner);
         ImageButton likeBtn = findViewById(R.id.likeBtn);
 
         // Recuperamos los datos del Intent
@@ -70,7 +68,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
         // Establecemos los valores de nombre y precio
         productName.setText(name);
-        productPrice.setText(price);
+        productPrice.setText(price + "€");
 
         // Verificamos si la URL de la imagen está presente
         if (image != null && !image.isEmpty()) {
@@ -109,15 +107,48 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         });
 
         // Listener para tamaño seleccionado
-        sizeGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.size_s) {
-                selectedSize = "S";
-            } else if (checkedId == R.id.size_m) {
-                selectedSize = "M";
-            } else if (checkedId == R.id.size_l) {
-                selectedSize = "L";
+        sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Asignamos el tamaño seleccionado
+                switch (position) {
+                    case 0: selectedSize = "S"; break;
+                    case 1: selectedSize = "M"; break;
+                    case 2: selectedSize = "L"; break;
+                    default: selectedSize = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedSize = null;
             }
         });
+
+        // Listener para color seleccionado
+        colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Asignamos el color seleccionado
+                if (position > 0) {
+                    color_name = parentView.getItemAtPosition(position).toString();
+                } else {
+                    color_name = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                color_name = null;
+            }
+        });
+
+        // Configuramos los adaptadores para los Spinners
+        ArrayAdapter<CharSequence> sizeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.size_array, android.R.layout.simple_spinner_item);
+        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sizeSpinner.setAdapter(sizeAdapter);
+
     }
 
     // Método para obtener las variaciones de colores (u otras variaciones del producto)
@@ -141,44 +172,56 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
                             // Procesar las variaciones si existen
                             JSONArray variations = jsonResponse.getJSONArray("variations");
-                            if (variations.length() > 1) {
-                                // Si hay más de un color, mostrar las variaciones
-                                for (int i = 0; i < variations.length(); i++) {
-                                    JSONObject variation = variations.getJSONObject(i);
-                                    String color = variation.getString("color");
-                                    String variationImage = variation.getString("image_url");
+                            List<String> colorList = new ArrayList<>();
+                            List<String> colorIds = new ArrayList<>();
+                            List<String> imageUrls = new ArrayList<>();
 
-                                    colorInt = getColor(color);
+                            // Agregar colores y IDs a las listas
+                            for (int i = 0; i < variations.length(); i++) {
+                                JSONObject variation = variations.getJSONObject(i);
+                                String colorId = variation.getString("color"); // ID del color
+                                String colorName = getColorName(colorId); // Convertir el color_id a nombre
+                                String colorImage = variation.getString("image_url"); // URL de la imagen por color
 
-                                    // Crear botón de color dinámicamente
-                                    Button colorButton = new Button(ProductDescriptionActivity.this);
-                                    colorButton.setBackgroundResource(R.drawable.button_template);  // Aplica la plantilla de fondo
-
-                                    // Modificar dinámicamente el color de fondo del botón
-                                    GradientDrawable drawable = (GradientDrawable) colorButton.getBackground();
-                                    drawable.setColor(colorInt);  // Cambiar el color del fondo usando colorInt (el color dinámico)
-
-                                    // Configuración de layout del botón
-                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                                            LinearLayout.LayoutParams.WRAP_CONTENT
-                                    );
-                                    params.setMargins(10, 10, 10, 10);  // Márgenes
-                                    colorButton.setLayoutParams(params);
-
-                                    // Establecer un listener para cambiar la imagen cuando se seleccione una variación
-                                    colorButton.setOnClickListener(view -> {
-                                        color_name = color;
-                                        Picasso.get().load(variationImage).into(productImage);
-                                    });
-
-                                    // Añadir el botón al contenedor de variaciones
-                                    variationContainer.addView(colorButton);
-                                }
-                            } else {
-                                // Si solo hay un color, ocultar el contenedor de variaciones
-                                variationContainer.setVisibility(View.GONE);
+                                colorList.add(colorName); // Agregar el nombre del color
+                                colorIds.add(colorId); // Agregar el ID del color
+                                imageUrls.add(colorImage); // Agregar la imagen correspondiente
                             }
+
+                            // Si no hay colores disponibles, mostrar "No disponible"
+                            if (colorList.isEmpty()) {
+                                colorList.add("No disponible");
+                                colorSpinner.setEnabled(false); // Deshabilitar el Spinner;
+                            }
+
+                            // Actualizar el Spinner con los colores
+                            ArrayAdapter<String> colorAdapter = new ArrayAdapter<>(ProductDescriptionActivity.this,
+                                    android.R.layout.simple_spinner_item, colorList);
+                            colorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            colorSpinner.setAdapter(colorAdapter);
+
+                            // Listener para color seleccionado
+                            colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                                    if (position > 0) { // Si se selecciona un color válido
+                                        color_name = colorList.get(position); // Asignar el nombre del color
+                                        colorInt = Integer.parseInt(colorIds.get(position)); // Asignar el ID del color
+                                        String selectedColorImage = imageUrls.get(position); // Obtener la URL de la imagen del color seleccionado
+                                        Picasso.get().load(selectedColorImage).into(productImage); // Actualizar la imagen
+                                    } else {
+                                        color_name = null; // No color seleccionado
+                                        colorInt = 0; // No color seleccionado
+                                    }
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parentView) {
+                                    color_name = null; // No color seleccionado
+                                    colorInt = 0; // No color seleccionado
+                                }
+                            });
+
                         } else {
                             Log.e("Product", "No se encontraron productos");
                         }
@@ -192,26 +235,30 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+
+
+
+
     // Método auxiliar para obtener un color a partir del nombre
-    public int getColor(String color) {
-        switch (color.toLowerCase()) {
-            case "1": return ContextCompat.getColor(this, R.color.color_rojo);
-            case "2": return ContextCompat.getColor(this, R.color.color_azul_marino);
-            case "3": return ContextCompat.getColor(this, R.color.color_negro);
-            case "4": return ContextCompat.getColor(this, R.color.color_blanco);
-            case "5": return ContextCompat.getColor(this, R.color.color_dorado);
-            case "6": return ContextCompat.getColor(this, R.color.color_plateado);
-            case "7": return ContextCompat.getColor(this, R.color.color_verde);
-            case "8": return ContextCompat.getColor(this, R.color.color_rosa);
-            case "9": return ContextCompat.getColor(this, R.color.color_morado);
-            case "10": return ContextCompat.getColor(this, R.color.color_gris);
-            case "11": return ContextCompat.getColor(this, R.color.color_amarillo);
-            case "12": return ContextCompat.getColor(this, R.color.color_naranja);
-            case "13": return ContextCompat.getColor(this, R.color.color_beige);
-            case "14": return ContextCompat.getColor(this, R.color.color_vino);
-            case "15": return ContextCompat.getColor(this, R.color.color_turquesa);
-            case "16": return ContextCompat.getColor(this, R.color.color_marron);
-            default: return ContextCompat.getColor(this, android.R.color.darker_gray);
+    public String getColorName(String colorId) {
+        switch (colorId) {
+            case "1": return "Rojo";
+            case "2": return "Azul Marino";
+            case "3": return "Negro";
+            case "4": return "Blanco";
+            case "5": return "Dorado";
+            case "6": return "Plateado";
+            case "7": return "Verde";
+            case "8": return "Rosa";
+            case "9": return "Morado";
+            case "10": return "Gris";
+            case "11": return "Amarillo";
+            case "12": return "Naranja";
+            case "13": return "Beige";
+            case "14": return "Vino";
+            case "15": return "Turquesa";
+            case "16": return "Marrón";
+            default: return "Desconocido"; // En caso de que el ID no coincida
         }
     }
 
@@ -242,10 +289,15 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
             @Override
             protected java.util.Map<String, String> getParams() {
+                // Verificar los parámetros antes de enviarlos
+                Log.d("AddToCart", "Product Name: " + name);
+                Log.d("AddToCart", "Color ID: " + colorInt);
+                Log.d("AddToCart", "Size: " + selectedSize);
+
                 // Crear los parámetros que se enviarán al servidor
                 java.util.Map<String, String> params = new java.util.HashMap<>();
                 params.put("product_name", name);
-                params.put("color_id", color_name);
+                params.put("color_id", String.valueOf(colorInt));
                 params.put("size", selectedSize);
                 return params;
             }

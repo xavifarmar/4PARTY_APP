@@ -7,122 +7,129 @@
     android:padding="16dp"
     tools:context=".CartActivity">
 
-    <!-- Contenedor principal para la imagen y detalles -->
+    <!-- Contenedor principal para la imagen, detalles y botones -->
     <LinearLayout
-        android:layout_width="394dp"
-        android:layout_height="148dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingEnd="8dp"
-        android:weightSum="1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="8dp">
 
         <!-- Imagen del producto -->
         <ImageView
             android:id="@+id/product_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:contentDescription="Product Image"
             android:scaleType="centerCrop"
-            android:src="@drawable/icon_heart_solid_red" />
+            android:src="@drawable/icon_heart_solid_red"
+            android:layout_marginEnd="16dp"/>
 
         <!-- Detalles del producto -->
         <LinearLayout
-            android:layout_width="57dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
             android:orientation="vertical"
-            android:paddingStart="8dp">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/productNameTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"
                 android:text="Product Name"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginBottom="4dp"/>
 
             <TextView
                 android:id="@+id/ProductColorTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
                 android:text="Color: Red"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
 
             <TextView
                 android:id="@+id/ProductSizeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:text="Size: M"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp"/>
 
-            <!-- Precio -->
             <TextView
                 android:id="@+id/ProductPriceTxt"
-                android:layout_width="53dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price: $50.00"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
-        <!-- Contenedor de botones de cantidad -->
+        <!-- Contenedor de botones de cantidad y eliminación -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp">
 
             <!-- Botón de incremento -->
             <Button
                 android:id="@+id/btnIncrease"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/rounded_red_background"
+                android:gravity="center"
                 android:text="+"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="20sp"/>
 
             <!-- Texto para la cantidad -->
             <TextView
                 android:id="@+id/ProductQuantityTxt"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="8dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
 
             <!-- Botón de decremento -->
             <Button
                 android:id="@+id/btnDecrease"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/rounded_red_background"
-                android:padding="12dp"
+                android:gravity="center"
                 android:text="-"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                android:textSize="20sp"/>
+
+            <!-- Botón de eliminación -->
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="Delete Product"
+                android:padding="8dp"
+                android:src="@drawable/trash_solid"
+                android:tint="@color/red"
+                android:layout_marginStart="16dp"/>
         </LinearLayout>
     </LinearLayout>
 

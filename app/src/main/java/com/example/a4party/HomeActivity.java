@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         obtenerProductos();
 
         // Referencias a los botones de navegación
+        ImageButton searchingBtn = findViewById(R.id.searchingBtn);
         ImageButton likesBtn = findViewById(R.id.heart_btn);
         ImageButton profileBtn = findViewById(R.id.profile_btn);
         ImageButton cartBtn = findViewById(R.id.cart_btn);
@@ -103,6 +104,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Cambiar a la actividad SearchActivity
+                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        searchingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
