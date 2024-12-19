@@ -6,23 +6,27 @@
     android:layout_height="match_parent">
 
     <!-- Botón de retroceso -->
-    <Button
-        android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Volver"
-        android:src="@drawable/icon_back_solid"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Título del producto -->
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/icon_back_solid"
+        android:text="Volver"
+        android:textColor="@color/text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_block" />
+
     <TextView
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="28dp"
         android:text="Producto"
         android:textSize="24sp"
@@ -32,22 +36,21 @@
 
     <ImageView
         android:id="@+id/product_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="326dp"
+        android:layout_height="317dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.4"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/product_name" />
 
     <LinearLayout
         android:id="@+id/price_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="399dp"
+        android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -57,24 +60,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/product_image">
 
+        <!-- Precio del producto, con layout_weight para ocupar el espacio restante -->
         <TextView
             android:id="@+id/product_price"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_weight="1"
             android:text="100€"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textColor="@color/text"
+            android:textSize="20sp" /> <!-- Precio ocupa el espacio restante -->
 
+        <!-- Icono de corazón, alineado a la derecha -->
         <ImageButton
             android:id="@+id/likeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="Añadir a favoritos"
-            app:srcCompat="@drawable/icon_heart_solid"
-            />
+            app:srcCompat="@drawable/icon_heart_solid" /> <!-- Añadido margen a la izquierda del icono -->
     </LinearLayout>
+
 
     <!-- Sección de Tallas -->
     <TextView
@@ -133,18 +140,19 @@
         app:layout_constraintTop_toBottomOf="@id/color_section"
         android:autofillHints="Colores"/>
 
+    <!-- Botón Añadir a la cesta -->
     <LinearLayout
         android:id="@+id/variation_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/color_spinner" />
 
-    <!-- Botón Añadir a la cesta -->
     <Button
         android:id="@+id/addToCartBtn"
         android:layout_width="0dp"
@@ -153,10 +161,34 @@
         android:layout_marginEnd="16dp"
         android:minHeight="50dp"
         android:text="Añadir a la cesta"
+        android:textColor="@color/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/variation_container"
         app:layout_constraintVertical_bias="0.946" />
+
+    <LinearLayout
+        android:id="@+id/logo_block"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/nav_bar"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Logo en el centro del bloque -->
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="157dp"
+            android:layout_height="55dp"
+            android:backgroundTint="@color/red"
+            app:srcCompat="@drawable/logo_icon_small"
+            app:tint="@color/red" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

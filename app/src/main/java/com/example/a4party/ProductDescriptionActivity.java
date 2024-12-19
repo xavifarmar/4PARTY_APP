@@ -100,7 +100,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         });
 
         // Botón de "Atrás"
-        Button backButton = findViewById(R.id.backBtn);
+        ImageButton backButton = findViewById(R.id.backBtn);
         backButton.setOnClickListener(view -> {
             Intent intent1 = new Intent(ProductDescriptionActivity.this, HomeActivity.class);
             startActivity(intent1);

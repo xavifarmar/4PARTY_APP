@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:background="@drawable/border_cart"
     tools:context=".CartActivity">
 
     <!-- Contenedor principal para la imagen, detalles y botones -->
@@ -40,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product Name"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:maxLines="1"
@@ -85,14 +86,14 @@
             android:layout_marginLeft="16dp">
 
             <!-- Botón de incremento -->
-            <Button
+            <ImageButton
                 android:id="@+id/btnIncrease"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_red_background"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/icon_plus_solid"
                 android:gravity="center"
                 android:text="+"
-                android:textColor="#FFFFFF"
+                app:tint="@color/text"
                 android:textSize="20sp"/>
 
             <!-- Texto para la cantidad -->
@@ -103,17 +104,17 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="center"
                 android:text="1"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text"
                 android:textSize="18sp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"/>
 
             <!-- Botón de decremento -->
-            <Button
+            <ImageButton
                 android:id="@+id/btnDecrease"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_red_background"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/icon_minus_solid"
                 android:gravity="center"
                 android:text="-"
                 android:textColor="#FFFFFF"
@@ -128,8 +129,8 @@
                 android:contentDescription="Delete Product"
                 android:padding="8dp"
                 android:src="@drawable/trash_solid"
-                android:tint="@color/red"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp"
+                app:tint="@color/red" />
         </LinearLayout>
     </LinearLayout>
 
