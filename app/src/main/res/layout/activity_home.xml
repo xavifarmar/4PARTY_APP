@@ -117,7 +117,6 @@
         android:text="Productos"
         android:textColor="@color/text"
         android:textSize="24dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -150,6 +149,7 @@
         android:layout_marginBottom="196dp"
         android:text="Tendencias"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -107,7 +107,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/size_section" />
+        app:layout_constraintTop_toBottomOf="@id/size_section"
+        android:background="@drawable/border_cart"/>
 
     <!-- Sección de Colores -->
 
@@ -138,7 +139,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/color_section"
-        android:autofillHints="Colores"/>
+        android:autofillHints="Colores"
+        android:background="@drawable/border_cart"/>
 
     <!-- Botón Añadir a la cesta -->
     <LinearLayout
