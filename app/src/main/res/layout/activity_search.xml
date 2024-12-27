@@ -126,9 +126,10 @@
     </HorizontalScrollView>
 
     <!-- Barra de Navegación Inferior -->
+
     <LinearLayout
         android:id="@+id/navigation_bar"
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="@color/nav_bar"
         android:gravity="center"
@@ -137,6 +138,7 @@
         android:weightSum="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
@@ -195,9 +197,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="646dp"
+        android:layout_height="568dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view"
-        tools:layout_editor_absoluteX="3dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

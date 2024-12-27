@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         ImageButton cartBtn = findViewById(R.id.cart_btn);
         ImageButton searchBtn = findViewById(R.id.search_btn);
         ImageButton homeBtn = findViewById(R.id.home_btn);
-
+        ImageButton searchBtn2 = findViewById(R.id.searchingBtn);
 
         // Configurar los estados de los botones (seleccionados/desactivados)
         homeBtn.setSelected(true);
@@ -104,6 +104,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Cambiar a la actividad SearchActivity
+                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        searchBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
