@@ -76,77 +76,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="380dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <!-- Botones con los textos solicitados -->
-        <Button
-            android:id="@+id/pedidosBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pedidos"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
-
-        <Button
-            android:id="@+id/devolucionesBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Devoluciones"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
-
-        <Button
-            android:id="@+id/misDatosBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mis Datos"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
-
-        <Button
-            android:id="@+id/ajustesBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ajustes de la App"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
-
-        <Button
-            android:id="@+id/acercaDeBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Acerca de"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
-
-        <Button
-            android:id="@+id/contactoBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contacto"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
 
         <!-- Botón de cerrar sesión con fondo distinto -->
         <Button
             android:id="@+id/logoutBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cerrar Sesión"
-            android:textSize="16sp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:text="Cerrar Sesión"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

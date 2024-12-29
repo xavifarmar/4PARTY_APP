@@ -1,19 +1,30 @@
 package com.example.a4party;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
@@ -33,14 +44,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(CartViewHolder holder, int position) {
         Cart cart = cartList.get(position);
-
-        // Imprimir valores para depurar
-        Log.d("CartAdapter", "Producto: " + cart.getProduct_name());
-        Log.d("CartAdapter", "Cantidad: " + cart.getQuantity());
-        Log.d("CartAdapter", "Tamaño: " + cart.getSize());
-        Log.d("CartAdapter", "Precio: " + cart.getPrice());
-        Log.d("CartAdapter", "Color: " + cart.getColor());
-        Log.d("CartAdapter", "Imagen URL: " + cart.getImage_url());
 
         // Asignar los datos del producto al viewHolder
         holder.productName.setText(cart.getProduct_name());
@@ -62,6 +65,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             cart.setQuantity(newQuantity);
             holder.quantity.setText(String.valueOf(newQuantity));
 
+            // Actualizar la cantidad en la base de datos
+            updateProductQuantityInCart(holder.itemView.getContext(), cart.getProduct_name(), newQuantity);
+
             // Notificar al adaptador que se actualizó el item
             notifyItemChanged(position); // Solo actualizar el item que se modificó
         });
@@ -71,6 +77,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 int newQuantity = cart.getQuantity() - 1;
                 cart.setQuantity(newQuantity);
                 holder.quantity.setText(String.valueOf(newQuantity));
+
+                // Actualizar la cantidad en la base de datos
+                updateProductQuantityInCart(holder.itemView.getContext(), cart.getProduct_name(), newQuantity);
 
                 // Notificar al adaptador que se actualizó el item
                 notifyItemChanged(position); // Solo actualizar el item que se modificó
@@ -110,5 +119,48 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void updateCartList(List<Cart> newCartList) {
         this.cartList = newCartList;
         notifyDataSetChanged();  // Actualiza toda la lista en el RecyclerView
+    }
+
+    // Método para actualizar la cantidad en la base de datos
+    private void updateProductQuantityInCart(Context context, String product_name, int quantity) {
+        String url = "http://10.0.2.2/4PARTY/updateCartQuantity.php"; // URL de la API que actualiza la cantidad
+
+        // Crear un objeto para enviar los parámetros (product_name y quantity)
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            String status = jsonResponse.getString("status");
+
+                            if (status.equals("success")) {
+                                Log.d("CartAdapter", "Cantidad actualizada correctamente");
+                            } else {
+                                Log.d("CartAdapter", "Error al actualizar la cantidad: " + jsonResponse.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("CartAdapter", "Error de red: " + error.toString());
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("product_name", product_name);  // Enviar el nombre del producto
+                params.put("quantity", String.valueOf(quantity));  // Enviar la cantidad
+                return params;
+            }
+        };
+
+        // Añadir la solicitud a la cola de Volley
+        Volley.newRequestQueue(context).add(stringRequest);
     }
 }

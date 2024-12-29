@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <!-- Botón de retroceso -->
 
@@ -11,8 +12,8 @@
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/transparent"
@@ -49,8 +50,8 @@
 
     <LinearLayout
         android:id="@+id/price_layout"
-        android:layout_width="341dp"
-        android:layout_height="69dp"
+        android:layout_width="323dp"
+        android:layout_height="68dp"
         android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -84,37 +85,38 @@
 
 
     <!-- Sección de Tallas -->
+
+    <!-- Desplegable de Tallas -->
     <TextView
         android:id="@+id/size_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:text="Tallas"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/price_layout" />
-
-    <!-- Desplegable de Tallas -->
-    <Spinner
-        android:id="@+id/size_spinner"
-        android:layout_width="165dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/size_section"
-        android:background="@drawable/border_cart"/>
 
     <!-- Sección de Colores -->
 
     <!-- Desplegable de Colores -->
 
     <!-- Container for dynamically added color buttons -->
+
+    <Spinner
+        android:id="@+id/size_spinner"
+        android:layout_width="165dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_cart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/size_section" />
 
     <TextView
         android:id="@+id/color_section"
@@ -128,21 +130,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price_layout" />
 
+    <!-- Botón Añadir a la cesta -->
+
     <Spinner
         android:id="@+id/color_spinner"
-        android:layout_width="176dp"
-        android:layout_height="47dp"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_section"
         android:autofillHints="Colores"
-        android:background="@drawable/border_cart"/>
+        android:background="@drawable/border_cart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_section" />
 
-    <!-- Botón Añadir a la cesta -->
     <LinearLayout
         android:id="@+id/variation_container"
         android:layout_width="0dp"
@@ -163,7 +166,7 @@
         android:layout_marginEnd="16dp"
         android:minHeight="50dp"
         android:text="Añadir a la cesta"
-        android:textColor="@color/text"
+        android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

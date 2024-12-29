@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="468dp"
+        android:layout_width="405dp"
+        android:layout_height="689dp"
         android:background="@color/background"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
@@ -112,8 +112,8 @@
         android:id="@+id/textView2"
         android:layout_width="224dp"
         android:layout_height="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif"
         android:text="Productos"
         android:textColor="@color/text"
@@ -142,16 +142,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/gradient_products"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="196dp"
-        android:text="Tendencias"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

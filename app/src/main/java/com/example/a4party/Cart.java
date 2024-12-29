@@ -1,8 +1,5 @@
 package com.example.a4party;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 public class Cart {
 
     private String product_name;
@@ -22,7 +19,7 @@ public class Cart {
     }
 
     // Getters y Setters
-    public String getProduct_name() {
+    public int getProduct_name() {
         return product_name;
     }
 

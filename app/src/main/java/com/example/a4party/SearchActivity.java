@@ -56,9 +56,6 @@ public class SearchActivity extends AppCompatActivity {
         searchAdapter = new ProductAdapter(this, productSearchList);
         recyclerView.setAdapter(searchAdapter);
 
-        // Llamar a la función para obtener los productos
-        getProductsFiltered();
-
         //Referencia a los botones de filtros
         Button man_btn = findViewById(R.id.button_hombre);
         Button woman_btn = findViewById(R.id.button_mujer);
@@ -113,23 +110,21 @@ public class SearchActivity extends AppCompatActivity {
 
         man_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String gender_id = "1";
+            public void onClick(View view) { getProductsFiltered("1" );
             }
         });
         woman_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String gender_id = "2";
+                getProductsFiltered("2");
             }
         });
     }
-    // Método para obtener los productos de la base de datos
 
-    private void getProductsFiltered() {
-        String gender_id = "1";
+    // Método para obtener los productos filtrados por género
+    private void getProductsFiltered(String gender_id) {
         // URL de tu archivo PHP que devuelve los productos en formato JSON
-        String url = "http://10.0.2.2/4PARTY/searchFilters.php"; // Cambia por la URL de tu servidor
+        String url = "http://10.0.2.2/4PARTY/searchFilters.php?gender_id=" + gender_id; // Cambia por la URL de tu servidor y agrega el parámetro gender_id
 
         Log.d("API Request", "Haciendo solicitud a: " + url); // Log para ver la URL
 
@@ -176,10 +171,10 @@ public class SearchActivity extends AppCompatActivity {
                         Log.e("Volley Error", error.toString()); // Log para errores de Volley
                         Toast.makeText(SearchActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
                     }
-
                 });
 
         // Agregar la solicitud a la cola de Volley
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
 }
