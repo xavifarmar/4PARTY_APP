@@ -19,7 +19,7 @@ public class Cart {
     }
 
     // Getters y Setters
-    public int getProduct_name() {
+    public String getProduct_name() {
         return product_name;
     }
 

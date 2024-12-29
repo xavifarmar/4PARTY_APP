@@ -66,10 +66,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             holder.quantity.setText(String.valueOf(newQuantity));
 
             // Actualizar la cantidad en la base de datos
-            updateProductQuantityInCart(holder.itemView.getContext(), //cart.getProduct_name(), newQuantity);
+            //updateProductQuantityInCart(holder.itemView.getContext(), cart.getProduct_name(), newQuantity);
 
             // Notificar al adaptador que se actualizó el item
-            notifyItemChanged(position); // Solo actualizar el item que se modificó
+            notifyItemChanged(position);// Solo actualizar el item que se modificó
         });
 
         holder.btnDecrease.setOnClickListener(v -> {
@@ -79,10 +79,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 holder.quantity.setText(String.valueOf(newQuantity));
 
                 // Actualizar la cantidad en la base de datos
-                updateProductQuantityInCart(holder.itemView.getContext(), //cart.getProduct_name(), newQuantity);
+                //updateProductQuantityInCart(holder.itemView.getContext(), //cart.getProduct_name(), newQuantity);
 
                 // Notificar al adaptador que se actualizó el item
-                notifyItemChanged(position); // Solo actualizar el item que se modificó
+                notifyItemChanged(position);// Solo actualizar el item que se modificó
             }
         });
     }
